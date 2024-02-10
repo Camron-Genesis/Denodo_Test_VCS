@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW bv_wo_stock_u_bv_wo_storages FOLDER = '/1 - connectivity/2 - base views' AS SELECT storage_id AS storage_id FROM (SELECT storage_id FROM bv_wo_stock SQL UNION ALL SELECT id FROM bv_wo_storages);
+
+ALTER VIEW bv_wo_stock_u_bv_wo_storages
+ LAYOUT (bv_wo_stock = [230, 430, 200, 109], bv_wo_storages = [503, 415, 200, 185]);
+
