@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW iv_order_status FOLDER = '/2 - integration' AS SELECT status AS status, count(*) AS status_count FROM bv_wo_orders GROUP BY status;
+
