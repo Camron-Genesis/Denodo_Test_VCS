@@ -1,5 +1,4 @@
-﻿/databases/denodo_training/folder.7 - summaries/7 - summaries.vql
-/databases/denodo_training/folder.2 - integration/2 - integration.vql
+﻿/databases/denodo_training/folder.2 - integration/2 - integration.vql
 /databases/denodo_training/folder.2 - integration/folder.orders/orders.vql
 /databases/denodo_training/folder.1 - connectivity/1 - connectivity.vql
 /databases/denodo_training/folder.1 - connectivity/folder.2 - base views/2 - base views.vql
@@ -15,4 +14,3 @@
 /databases/denodo_training/folder.1 - connectivity/folder.2 - base views/views/bv_ho_order_item.vql
 /databases/denodo_training/folder.2 - integration/views/iv_historical_orders.vql
 /databases/denodo_training/folder.2 - integration/folder.orders/views/iv_orders_2.vql
-/databases/denodo_training/folder.2 - integration/folder.orders/views/iv_orders_customer_detail.vql

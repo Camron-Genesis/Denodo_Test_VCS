@@ -1,2 +1,0 @@
-﻿CREATE OR REPLACE VIEW iv_customer FOLDER = '/2 - integration' AS SELECT * FROM bv_cc_customer;
-
