@@ -31,17 +31,18 @@ CREATE OR REPLACE TABLE bv_hr_employees I18N us_pst (
         employee_id:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '6'),
         first_name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20'),
         last_name:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '25'),
-        email:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '50'),
-        phone_number:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20'),
+        email:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '50') TAGS (confidential),
+        phone_number:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20') TAGS (confidential),
         hire_date:timestamp (notnull, sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
         job_id:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '10'),
-        salary:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8'),
+        salary:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '8') TAGS (confidential),
         commission_pct:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '2'),
         manager_id:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '6'),
         department_id:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '4')
     )
     FOLDER = '/1 - connectivity/2 - base views/hr'
     CONSTRAINT 'EMP_EMP_ID_PK' PRIMARY KEY ( 'employee_id' )
+    TAGS (confidential)
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_hr_employees(

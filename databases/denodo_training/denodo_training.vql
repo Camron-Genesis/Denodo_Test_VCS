@@ -1,4 +1,12 @@
-﻿CREATE OR REPLACE DATABASE denodo_training '';
+﻿CREATE OR REPLACE DATABASE denodo_training ''
+  AUTHENTICATION LDAP denodo_training.ds_active_directory
+    USERBASE = 'OU=users,dc=denodo,dc=loc'
+    USERATTRIBUTENAME = 'uid'
+    USERSEARCH = '(objectClass=person)'
+    ROLEBASE = 'OU=groups,DC=denodo,DC=loc'
+    ROLEATTRIBUTENAME = 'cn'
+    ROLESEARCH = '(&(objectClass=groupOfNames)(member=@{{USERDN}}))'
+    ROLESSEARCHAUTHENTICATION;
 
 ALTER DATABASE denodo_training
   CHARSET DEFAULT;

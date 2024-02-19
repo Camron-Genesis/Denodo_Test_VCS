@@ -19,7 +19,7 @@ CREATE OR REPLACE WRAPPER JDBC bv_hr_locations
 
 CREATE OR REPLACE TABLE bv_hr_locations I18N us_pst (
         location_id:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '4'),
-        street_address:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '40'),
+        street_address:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '40') TAGS (confidential),
         postal_code:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '12'),
         city:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '30'),
         state_province:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '25'),
@@ -27,6 +27,7 @@ CREATE OR REPLACE TABLE bv_hr_locations I18N us_pst (
     )
     FOLDER = '/1 - connectivity/2 - base views/hr'
     CONSTRAINT 'LOC_ID_PK' PRIMARY KEY ( 'location_id' )
+    TAGS (confidential)
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_hr_locations(
