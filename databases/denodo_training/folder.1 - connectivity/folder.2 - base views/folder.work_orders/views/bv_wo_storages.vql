@@ -24,11 +24,12 @@ CREATE OR REPLACE TABLE bv_wo_storages I18N us_pst (
         postal_code:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20'),
         country:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '70'),
         country_code:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20'),
-        latitude:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '20'),
-        longitude:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '20')
+        latitude:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '20') TAGS (confidential2),
+        longitude:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '20') TAGS (confidential2)
     )
     FOLDER = '/1 - connectivity/2 - base views/work_orders'
     CONSTRAINT 'STORAGES_PK' PRIMARY KEY ( 'id' )
+    TAGS (confidential2)
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_wo_storages(

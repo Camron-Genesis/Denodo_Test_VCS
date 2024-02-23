@@ -60,7 +60,7 @@ CREATE OR REPLACE TABLE bv_product I18N us_pst (
     )
     FOLDER = '/1 - connectivity/2 - base views/product'
     PRIMARY KEY ( 'productid' )
-    CACHE OFF
+    CACHE FULL
     BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_product(
@@ -91,5 +91,5 @@ CREATE OR REPLACE TABLE bv_product I18N us_pst (
         )
         WRAPPER (ws bv_product)
     )
-    SMART_CACHE_ONLY;
+    ATSOURCE_THROUGH_VDP_ONLY;
 
