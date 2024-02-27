@@ -62,7 +62,7 @@ CREATE OR REPLACE TABLE bv_product I18N us_pst (
     PRIMARY KEY ( 'productid' )
     CACHE FULL
     BATCHSIZEINCACHE DEFAULT
-    TIMETOLIVEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_product(
         I18N us_pst
         CONSTRAINTS (
@@ -91,5 +91,5 @@ CREATE OR REPLACE TABLE bv_product I18N us_pst (
         )
         WRAPPER (ws bv_product)
     )
-    ATSOURCE_THROUGH_VDP_ONLY;
+    ATCACHE_THROUGH_VDP_ONLY;
 
