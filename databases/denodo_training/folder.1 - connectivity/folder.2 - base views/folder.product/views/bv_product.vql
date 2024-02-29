@@ -91,5 +91,6 @@ CREATE OR REPLACE TABLE bv_product I18N us_pst (
         )
         WRAPPER (ws bv_product)
     )
+    DECLARE CACHE INDEX index_id ON (productid ASC)
     ATCACHE_THROUGH_VDP_ONLY;
 

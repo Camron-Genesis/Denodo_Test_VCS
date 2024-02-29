@@ -52,7 +52,7 @@ CREATE OR REPLACE TABLE bv_wo_customer I18N us_pst (
     )
     FOLDER = '/1 - connectivity/2 - base views/work_orders'
     CONSTRAINT 'CUSTOMER_PK' PRIMARY KEY ( 'id' , 'customer_code_internal' )
-    CACHE OFF
+    CACHE PARTIAL
     BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_wo_customer(
@@ -73,5 +73,6 @@ CREATE OR REPLACE TABLE bv_wo_customer I18N us_pst (
         )
         WRAPPER (jdbc bv_wo_customer)
         ALTERNATIVE_WRAPPERS (jdbc ds_historical_orders_bv_wo_customer)
-    );
+    )
+    SMART_ONLY;
 

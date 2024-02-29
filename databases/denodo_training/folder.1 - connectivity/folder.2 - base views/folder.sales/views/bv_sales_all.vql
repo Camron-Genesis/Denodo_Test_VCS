@@ -27,7 +27,8 @@ CREATE OR REPLACE TABLE bv_sales_all I18N us_pst (
         totalprice:text
     )
     FOLDER = '/1 - connectivity/2 - base views/sales'
-    CACHE OFF
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_sales_all(
         I18N us_pst
@@ -45,5 +46,6 @@ CREATE OR REPLACE TABLE bv_sales_all I18N us_pst (
         OUTPUTLIST (bundleamount, customerid, employeeid, productid, productid_0, productsaleprice, saledate, saleid, totalprice
         )
         WRAPPER (json bv_sales_all)
-    );
+    )
+    ATSOURCE_THROUGH_VDP_ONLY;
 

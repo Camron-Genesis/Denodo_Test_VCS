@@ -5,7 +5,7 @@ CREATE OR REPLACE WRAPPER JDBC bv_sf_contact
     SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.2 - base views.views.jdbc.bv_sf_contact.SCHEMANAME}' 
     RELATIONNAME='CONTACT' 
     OUTPUTSCHEMA (
-        id = 'ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        id = 'ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  NOT NULL SORTABLE,
         isdeleted = 'ISDELETED' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
         masterrecordid = 'MASTERRECORDID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
         accountid = 'ACCOUNTID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
@@ -90,7 +90,7 @@ CREATE OR REPLACE WRAPPER JDBC bv_sf_contact
     );
 
 CREATE OR REPLACE TABLE bv_sf_contact I18N us_pst (
-        id:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        id:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         isdeleted:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         masterrecordid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         accountid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
@@ -174,9 +174,10 @@ CREATE OR REPLACE TABLE bv_sf_contact I18N us_pst (
         brighttalk__user_id__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26')
     )
     FOLDER = '/1 - connectivity/2 - base views'
-    CACHE OFF
+    PRIMARY KEY ( 'id' )
+    CACHE FULL INCREMENTAL 'lastmodifieddate > cast(''@LAST_REFRESH_DATE'' AS TIMESTAMP)' NO_DELEGATE_CONDITIONS_TO_SOURCE 
     BATCHSIZEINCACHE DEFAULT
-    TIMETOLIVEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_sf_contact(
         I18N us_pst
         CONSTRAINTS (
@@ -266,5 +267,7 @@ CREATE OR REPLACE TABLE bv_sf_contact I18N us_pst (
         OUTPUTLIST (accountid, active__c, also_known_as_contact__c, assistantemail__c, assistantname, assistantphone, auxfilteringcode__c, birthdate, brighttalk__user_id__c, contact_status__c, contacts__c, createdbyid, createddate, currencyisocode, department, description, donotcall, email, emailbounceddate, emailbouncedreason, external_user_id__c, fax, firstname, hasoptedoutofemail, homephone, id, isdeleted, isemailbounced, jigsaw, jigsawcontactid, lastactivitydate, lastcurequestdate, lastcuupdatedate, lastmodifiedbyid, lastmodifieddate, lastname, lastreferenceddate, lastvieweddate, lead_gen_event__c, lead_origin__c, lead_score__c, leadsource, level__c, linkpointtouchdate__c, mailingcity, mailingcountry, mailinggeocodeaccuracy, mailinglatitude, mailinglongitude, mailingpostalcode, mailingstate, mailingstreet, masterrecordid, mobilephone, name, othercity, othercountry, othergeocodeaccuracy, otherlatitude, otherlongitude, otherphone, otherpostalcode, otherstate, otherstreet, owner_id__c, ownerid, phone, photourl, pw_cc__countrytext__c, pw_cc__mailingaddressstatus__c, pw_cc__mailingcountrylookup__c, pw_cc__mailingstatelookup__c, pw_cc__mailingzipcodelookup__c, pw_cc__otheraddressstatus__c, pw_cc__statetext__c, rating__c, reportstoid, salutation, systemmodstamp, title, zoom__zi_importeddate__c, zoom__zi_person__c
         )
         WRAPPER (jdbc bv_sf_contact)
-    );
+    )
+    DECLARE CACHE INDEX contact_id_idx UNIQUE  ON (id)
+    ATCACHE_THROUGH_VDP_ONLY;
 

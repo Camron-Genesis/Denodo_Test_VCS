@@ -5,7 +5,7 @@ CREATE OR REPLACE WRAPPER JDBC bv_sf_account
     SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.2 - base views.views.jdbc.bv_sf_account.SCHEMANAME}' 
     RELATIONNAME='ACCOUNT' 
     OUTPUTSCHEMA (
-        id = 'ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        id = 'ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  NOT NULL SORTABLE,
         isdeleted = 'ISDELETED' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
         masterrecordid = 'MASTERRECORDID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
         name = 'NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
@@ -70,7 +70,7 @@ CREATE OR REPLACE WRAPPER JDBC bv_sf_account
     );
 
 CREATE OR REPLACE TABLE bv_sf_account I18N us_pst (
-        id:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        id:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         isdeleted:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         masterrecordid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
         name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
@@ -134,8 +134,10 @@ CREATE OR REPLACE TABLE bv_sf_account I18N us_pst (
         pw_cc__shippingzipcodelookup_c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26')
     )
     FOLDER = '/1 - connectivity/2 - base views'
-    CACHE OFF
-    TIMETOLIVEINCACHE DEFAULT
+    PRIMARY KEY ( 'id' )
+    CACHE FULL INCREMENTAL 'lastmodifieddate > cast(''@LAST_REFRESH_DATE'' AS TIMESTAMP)' NO_DELEGATE_CONDITIONS_TO_SOURCE 
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_sf_account(
         I18N us_pst
         CONSTRAINTS (
@@ -205,5 +207,7 @@ CREATE OR REPLACE TABLE bv_sf_account I18N us_pst (
         OUTPUTLIST (accounts__c, accountsource, annualrevenue, auxfilteringcode__c, billingcity, billingcountry, billinggeocodeaccuracy, billinglatitude, billinglongitude, billingpostalcode, billingstate, billingstreet, createdbyid, createddate, currencyisocode, d_u_n_s__c, description, external_customer_code__c, fax, hooversid__c, id, industry, isdeleted, jigsaw, jigsawcompanyid, lastactivitydate, lastmodifiedbyid, lastmodifieddate, lastreferenceddate, lastvieweddate, masterrecordid, name, numberofemployees, ownerid, parentid, phone, photourl, publishable__c, pw_cc__billingaddressstatus__c, pw_cc__billingcountrylookup__c, pw_cc__billingstatelookup__c, pw_cc__billingzipcodelookup__c, pw_cc__shippingaddressstatus_c, pw_cc__shippingcountrylookup_c, pw_cc__shippingstatelookup__c, pw_cc__shippingzipcodelookup_c, shippingcity, shippingcountry, shippinggeocodeaccuracy, shippinglatitude, shippinglongitude, shippingpostalcode, shippingstate, shippingstreet, sicdesc, status__c, systemmodstamp, target_level__c, type, website, zoom__zi_company__c, zoom__zi_importeddate__c
         )
         WRAPPER (jdbc bv_sf_account)
-    );
+    )
+    DECLARE CACHE INDEX account_id_idx UNIQUE  ON (id ASC)
+    ATCACHE_THROUGH_VDP_ONLY;
 

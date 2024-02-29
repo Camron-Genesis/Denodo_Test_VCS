@@ -18,6 +18,21 @@ CREATE OR REPLACE WRAPPER JDBC bv_wo_orders
     CONSTRAINT 'ORDERS_PK' PRIMARY KEY ( 'ID' )
     INDEX 'ORDERS_PK' CLUSTER UNIQUE PRIMARY ( 'ID' );
 
+CREATE OR REPLACE WRAPPER JDBC ds_web_orders_bv_wo_orders
+    DATASOURCENAME=ds_web_orders
+    SCHEMANAME='${databases.denodo_training.views.jdbc.ds_web_orders_bv_wo_orders.SCHEMANAME}' 
+    RELATIONNAME='ORDERS' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.math.BigDecimal' (OPT) (sourcetypeid='3', sourcetypename='NUMBER', sourcetyperadix='10')  NOT NULL SORTABLE,
+        customer_code = 'CUSTOMER_CODE' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  NOT NULL SORTABLE,
+        status = 'STATUS' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  NOT NULL SORTABLE,
+        date_placed = 'DATE_PLACED' :'java.time.LocalDateTime' (OPT) (sourcetypesize='11', sourcetypeid='93', sourcetypedecimals='6', sourcetypename='TIMESTAMP(6)', sourcetyperadix='10')  SORTABLE,
+        date_delivered = 'DATE_DELIVERED' :'java.time.LocalDateTime' (OPT) (sourcetypesize='11', sourcetypeid='93', sourcetypedecimals='6', sourcetypename='TIMESTAMP(6)', sourcetyperadix='10')  SORTABLE,
+        date_closed = 'DATE_CLOSED' :'java.time.LocalDateTime' (OPT) (sourcetypesize='11', sourcetypeid='93', sourcetypedecimals='6', sourcetypename='TIMESTAMP(6)', sourcetyperadix='10')  SORTABLE
+    )
+    CONSTRAINT 'ORDERS_PK' PRIMARY KEY ( 'ID' )
+    INDEX 'ORDERS_PK' CLUSTER UNIQUE PRIMARY ( 'ID' );
+
 CREATE OR REPLACE TABLE bv_wo_orders I18N us_pst (
         id:decimal (notnull, sourcetypeid = '3', sourcetyperadix = '10'),
         customer_code:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '20'),
@@ -44,5 +59,6 @@ CREATE OR REPLACE TABLE bv_wo_orders I18N us_pst (
         OUTPUTLIST (customer_code, date_closed, date_delivered, date_placed, id, status
         )
         WRAPPER (jdbc bv_wo_orders)
+        ALTERNATIVE_WRAPPERS (jdbc ds_web_orders_bv_wo_orders)
     );
 
