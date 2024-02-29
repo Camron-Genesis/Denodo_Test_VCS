@@ -29,7 +29,7 @@ CREATE OR REPLACE TABLE bv_sales_all I18N us_pst (
     FOLDER = '/1 - connectivity/2 - base views/sales'
     CACHE FULL
     BATCHSIZEINCACHE DEFAULT
-    TIMETOLIVEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_sales_all(
         I18N us_pst
         CONSTRAINTS (
@@ -47,5 +47,5 @@ CREATE OR REPLACE TABLE bv_sales_all I18N us_pst (
         )
         WRAPPER (json bv_sales_all)
     )
-    ATSOURCE_THROUGH_VDP_ONLY;
+    ATCACHE_THROUGH_VDP_ONLY;
 
