@@ -22,6 +22,7 @@ CREATE OR REPLACE TABLE bv_hr_countries I18N us_pst (
     FOLDER = '/1 - connectivity/2 - base views/hr'
     CONSTRAINT 'COUNTRY_C_ID_PK' PRIMARY KEY ( 'country_id' )
     CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_hr_countries(
         I18N us_pst
@@ -33,5 +34,6 @@ CREATE OR REPLACE TABLE bv_hr_countries I18N us_pst (
         OUTPUTLIST (country_id, country_name, region_id
         )
         WRAPPER (jdbc bv_hr_countries)
-    );
+    )
+    SMART_ONLY;
 

@@ -35,6 +35,28 @@ CREATE OR REPLACE WRAPPER JDBC ds_historical_orders_bv_wo_customer
         main_country = 'MAIN_COUNTRY' :'java.lang.String' (OPT) (sourcetypesize='100', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
         registered_date = 'REGISTERED_DATE' :'java.time.LocalDateTime' (OPT) (sourcetypesize='11', sourcetypeid='93', sourcetypedecimals='6', sourcetypename='TIMESTAMP(6)', sourcetyperadix='10')  NOT NULL SORTABLE
     )
+    SOURCECONFIGURATION (
+        datainorderfieldslist = ()
+    )
+    CONSTRAINT 'CUSTOMER_PK' PRIMARY KEY ( 'ID' , 'CUSTOMER_CODE_INTERNAL' )
+    INDEX 'CUSTOMER_PK' CLUSTER UNIQUE PRIMARY ( 'ID' , 'CUSTOMER_CODE_INTERNAL' );
+
+CREATE OR REPLACE WRAPPER JDBC ds_historical_orders_wo_customer
+    DATASOURCENAME=ds_historical_orders
+    SCHEMANAME='${databases.denodo_training.views.jdbc.ds_historical_orders_wo_customer.SCHEMANAME}' 
+    RELATIONNAME='CUSTOMER' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.math.BigDecimal' (OPT) (sourcetypeid='3', sourcetypename='NUMBER', sourcetyperadix='10')  NOT NULL SORTABLE,
+        customer_code_internal = 'CUSTOMER_CODE_INTERNAL' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  NOT NULL SORTABLE,
+        first_name = 'FIRST_NAME' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  NOT NULL SORTABLE,
+        last_name = 'LAST_NAME' :'java.lang.String' (OPT) (sourcetypesize='100', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
+        email = 'EMAIL' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  NOT NULL SORTABLE,
+        phone = 'PHONE' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
+        main_address = 'MAIN_ADDRESS' :'java.lang.String' (OPT) (sourcetypesize='200', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
+        main_postcode = 'MAIN_POSTCODE' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
+        main_country = 'MAIN_COUNTRY' :'java.lang.String' (OPT) (sourcetypesize='100', sourcetypeid='12', sourcetypename='VARCHAR2', sourcetyperadix='10')  SORTABLE,
+        registered_date = 'REGISTERED_DATE' :'java.time.LocalDateTime' (OPT) (sourcetypesize='11', sourcetypeid='93', sourcetypedecimals='6', sourcetypename='TIMESTAMP(6)', sourcetyperadix='10')  NOT NULL SORTABLE
+    )
     CONSTRAINT 'CUSTOMER_PK' PRIMARY KEY ( 'ID' , 'CUSTOMER_CODE_INTERNAL' )
     INDEX 'CUSTOMER_PK' CLUSTER UNIQUE PRIMARY ( 'ID' , 'CUSTOMER_CODE_INTERNAL' );
 
@@ -52,7 +74,7 @@ CREATE OR REPLACE TABLE bv_wo_customer I18N us_pst (
     )
     FOLDER = '/1 - connectivity/2 - base views/work_orders'
     CONSTRAINT 'CUSTOMER_PK' PRIMARY KEY ( 'id' , 'customer_code_internal' )
-    CACHE PARTIAL
+    CACHE OFF
     BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_wo_customer(
@@ -72,7 +94,7 @@ CREATE OR REPLACE TABLE bv_wo_customer I18N us_pst (
         OUTPUTLIST (customer_code_internal, email, first_name, id, last_name, main_address, main_country, main_postcode, phone, registered_date
         )
         WRAPPER (jdbc bv_wo_customer)
-        ALTERNATIVE_WRAPPERS (jdbc ds_historical_orders_bv_wo_customer)
+        ALTERNATIVE_WRAPPERS (jdbc ds_historical_orders_bv_wo_customer, jdbc ds_historical_orders_wo_customer)
     )
     SMART_ONLY;
 
