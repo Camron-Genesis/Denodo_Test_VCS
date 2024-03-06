@@ -1,0 +1,9 @@
+﻿CREATE OR REPLACE ASSOCIATION iv_nationality_predicter_iv_home_addresses REFERENTIAL CONSTRAINT 
+FOLDER = '/7 - associations'
+    ENDPOINT iv_home_addresses iv_nationality_predicter (0,1)
+    ENDPOINT iv_nationality_predicter iv_home_addresses PRINCIPAL (1)
+    ADD MAPPING name=lastname_0;
+
+ALTER ASSOCIATION iv_nationality_predicter_iv_home_addresses
+ LAYOUT (iv_nationality_predicter = [165, 256, 200, 105], iv_home_addresses = [519, 242, 200, 185]);
+

@@ -1,0 +1,47 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON bv_county_state
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_county_state
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.bv_county_state.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        jsonarray = 'JSONArray' : ARRAY OF (
+            jsonarray = 'JSONArray' : REGISTER OF (
+                jsonarray = 'JSONArray' : ARRAY OF (
+                    jsonarray = 'JSONArray' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE bv_county_state_jsonarray_jsonarray_jsonarray_jsonarray AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_county_state_jsonarray_jsonarray_jsonarray AS ARRAY OF bv_county_state_jsonarray_jsonarray_jsonarray_jsonarray;
+
+CREATE OR REPLACE TYPE bv_county_state_jsonarray_jsonarray AS REGISTER OF (jsonarray:ds_county_state_jsonarray_jsonarray_jsonarray);
+
+CREATE OR REPLACE TYPE ds_county_state_jsonarray AS ARRAY OF bv_county_state_jsonarray_jsonarray;
+
+CREATE OR REPLACE TABLE bv_state_population I18N us_est (
+        jsonarray:ds_county_state_jsonarray
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_county_state(
+        I18N us_est
+        CONSTRAINTS (
+             ADD jsonarray NOS ZERO ()
+             ADD jsonarray NOS ZERO ()
+             ADD jsonarray.jsonarray NOS ZERO ()
+             ADD jsonarray.jsonarray NOS ZERO ()
+             ADD jsonarray.jsonarray.field_0 NOS ZERO ()
+        )
+        OUTPUTLIST (jsonarray
+        )
+        WRAPPER (json bv_county_state)
+    );
+

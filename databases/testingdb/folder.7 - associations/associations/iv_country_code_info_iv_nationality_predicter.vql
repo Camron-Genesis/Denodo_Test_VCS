@@ -1,0 +1,9 @@
+﻿CREATE OR REPLACE ASSOCIATION iv_country_code_info_iv_nationality_predicter REFERENTIAL CONSTRAINT 
+FOLDER = '/7 - associations'
+    ENDPOINT iv_nationality_predicter iv_country_code_info (1)
+    ENDPOINT iv_country_code_info iv_nationality_predicter PRINCIPAL (1)
+    ADD MAPPING country_code=predicted_country;
+
+ALTER ASSOCIATION iv_country_code_info_iv_nationality_predicter
+ LAYOUT (iv_country_code_info = [125, 146, 200, 85], iv_nationality_predicter = [534, 125, 200, 105]);
+

@@ -1,0 +1,195 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER XML ds_rss_the_daily
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_rss_the_daily
+    TUPLEROOT 'rss'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.1 - data sources.views.xml.ds_rss_the_daily.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (rss = 'rss' : REGISTER OF (
+        version = '#version' : 'java.lang.Float',
+        channel = 'channel' : REGISTER OF (
+            atomlink_0 = 'atom:link' : ARRAY OF (
+                atomlink_0 = 'atom:link' : REGISTER OF (
+                    href = '#href' : 'java.lang.String',
+                    rel = '#rel' : 'java.lang.String',
+                    title = '#title' : 'java.lang.String',
+                    type = '#type' : 'java.lang.String'
+                )
+            ),
+            generator = 'generator' : 'java.lang.String',
+            title = 'title' : 'java.lang.String',
+            description = 'description' : 'java.lang.String',
+            copyright = 'copyright' : 'java.lang.String',
+            language = 'language' : 'java.lang.String',
+            pubdate = 'pubDate' : 'java.lang.String',
+            lastbuilddate = 'lastBuildDate' : 'java.lang.String',
+            image = 'image' : REGISTER OF (
+                link = 'link' : 'java.lang.String',
+                title = 'title' : 'java.lang.String',
+                url = 'url' : 'java.lang.String'
+            ),
+            link = 'link' : 'java.lang.String',
+            itunestype_0 = 'itunes:type' : 'java.lang.String',
+            itunessummary_0 = 'itunes:summary' : 'java.lang.String',
+            itunesauthor_0 = 'itunes:author' : 'java.lang.String',
+            itunesexplicit_0 = 'itunes:explicit' : 'java.lang.String',
+            itunesimage_0 = 'itunes:image' : REGISTER OF (
+                href = '#href' : 'java.lang.String'
+            ),
+            itunesnewfeedurl_0 = 'itunes:new-feed-url' : 'java.lang.String',
+            itunesowner_0 = 'itunes:owner' : REGISTER OF (
+                itunesname_0 = 'itunes:name' : 'java.lang.String',
+                itunesemail_0 = 'itunes:email' : 'java.lang.String'
+            ),
+            itunescategory_0 = 'itunes:category' : REGISTER OF (
+                text = '#text' : 'java.lang.String',
+                itunescategory_0 = 'itunes:category' : REGISTER OF (
+                    text = '#text' : 'java.lang.String'
+                )
+            ),
+            item = 'item' : ARRAY OF (
+                item = 'item' : REGISTER OF (
+                    guid = 'guid' : REGISTER OF (
+                        ispermalink = '#isPermaLink' : 'java.lang.Boolean',
+                        guid = 'guid' : 'java.lang.String'
+                    ),
+                    title = 'title' : 'java.lang.String',
+                    description = 'description' : 'java.lang.String',
+                    pubdate = 'pubDate' : 'java.lang.String',
+                    author = 'author' : 'java.lang.String',
+                    link = 'link' : 'java.lang.String',
+                    mediathumbnail_0 = 'media:thumbnail' : REGISTER OF (
+                        height = '#height' : 'java.lang.Short',
+                        url = '#url' : 'java.lang.String',
+                        width = '#width' : 'java.lang.Short'
+                    ),
+                    contentencoded_0 = 'content:encoded' : 'java.lang.String',
+                    enclosure = 'enclosure' : REGISTER OF (
+                        length = '#length' : 'java.lang.Integer',
+                        type = '#type' : 'java.lang.String',
+                        url = '#url' : 'java.lang.String'
+                    ),
+                    itunestitle_0 = 'itunes:title' : 'java.lang.String',
+                    itunesauthor_0 = 'itunes:author' : 'java.lang.String',
+                    itunesimage_0 = 'itunes:image' : REGISTER OF (
+                        href = '#href' : 'java.lang.String'
+                    ),
+                    itunesduration_0 = 'itunes:duration' : 'java.lang.String',
+                    itunessummary_0 = 'itunes:summary' : 'java.lang.String',
+                    itunessubtitle_0 = 'itunes:subtitle' : 'java.lang.String',
+                    itunesexplicit_0 = 'itunes:explicit' : 'java.lang.String',
+                    itunesepisodetype_0 = 'itunes:episodeType' : 'java.lang.String',
+                    itunesepisode_0 = 'itunes:episode' : 'java.lang.Short'
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_atomlink_0_atomlink_0 AS REGISTER OF (href:text, rel:text, title:text, type:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_atomlink_0 AS ARRAY OF ds_rss_the_daily_channel_atomlink_0_atomlink_0;
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_image AS REGISTER OF (link:text, title:text, url:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_itunesimage_0 AS REGISTER OF (href:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_itunesowner_0 AS REGISTER OF (itunesname_0:text, itunesemail_0:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_itunescategory_0_itunescategory_0 AS REGISTER OF (text:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_itunescategory_0 AS REGISTER OF (text:text, itunescategory_0:ds_rss_the_daily_channel_itunescategory_0_itunescategory_0);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item_item_guid AS REGISTER OF (ispermalink:boolean, guid:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item_item_mediathumbnail_0 AS REGISTER OF (height:int, url:text, width:int);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item_item_enclosure AS REGISTER OF (length:int, type:text, url:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item_item_itunesimage_0 AS REGISTER OF (href:text);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item_item AS REGISTER OF (guid:ds_rss_the_daily_channel_item_item_guid, title:text, description:text, pubdate:text, author:text, link:text, mediathumbnail_0:ds_rss_the_daily_channel_item_item_mediathumbnail_0, contentencoded_0:text, enclosure:ds_rss_the_daily_channel_item_item_enclosure, itunestitle_0:text, itunesauthor_0:text, itunesimage_0:ds_rss_the_daily_channel_item_item_itunesimage_0, itunesduration_0:text, itunessummary_0:text, itunessubtitle_0:text, itunesexplicit_0:text, itunesepisodetype_0:text, itunesepisode_0:int);
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel_item AS ARRAY OF ds_rss_the_daily_channel_item_item;
+
+CREATE OR REPLACE TYPE ds_rss_the_daily_channel AS REGISTER OF (atomlink_0:ds_rss_the_daily_channel_atomlink_0, generator:text, title:text, description:text, copyright:text, language:text, pubdate:text, lastbuilddate:text, image:ds_rss_the_daily_channel_image, link:text, itunestype_0:text, itunessummary_0:text, itunesauthor_0:text, itunesexplicit_0:text, itunesimage_0:ds_rss_the_daily_channel_itunesimage_0, itunesnewfeedurl_0:text, itunesowner_0:ds_rss_the_daily_channel_itunesowner_0, itunescategory_0:ds_rss_the_daily_channel_itunescategory_0, item:ds_rss_the_daily_channel_item);
+
+CREATE OR REPLACE TABLE bv_rss_the_daily I18N us_est (
+        version:float,
+        channel:ds_rss_the_daily_channel
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE 86400
+    ADD SEARCHMETHOD ds_rss_the_daily(
+        I18N us_est
+        CONSTRAINTS (
+             ADD version NOS ZERO ()
+             ADD channel NOS ZERO ()
+             ADD channel.atomlink_0 NOS ZERO ()
+             ADD channel.atomlink_0 NOS ZERO ()
+             ADD channel.atomlink_0.href NOS ZERO ()
+             ADD channel.atomlink_0.rel NOS ZERO ()
+             ADD channel.atomlink_0.title NOS ZERO ()
+             ADD channel.atomlink_0.type NOS ZERO ()
+             ADD channel.generator NOS ZERO ()
+             ADD channel.title NOS ZERO ()
+             ADD channel.description NOS ZERO ()
+             ADD channel.copyright NOS ZERO ()
+             ADD channel.language NOS ZERO ()
+             ADD channel.pubdate NOS ZERO ()
+             ADD channel.lastbuilddate NOS ZERO ()
+             ADD channel.image NOS ZERO ()
+             ADD channel.image.link NOS ZERO ()
+             ADD channel.image.title NOS ZERO ()
+             ADD channel.image.url NOS ZERO ()
+             ADD channel.link NOS ZERO ()
+             ADD channel.itunestype_0 NOS ZERO ()
+             ADD channel.itunessummary_0 NOS ZERO ()
+             ADD channel.itunesauthor_0 NOS ZERO ()
+             ADD channel.itunesexplicit_0 NOS ZERO ()
+             ADD channel.itunesimage_0 NOS ZERO ()
+             ADD channel.itunesimage_0.href NOS ZERO ()
+             ADD channel.itunesnewfeedurl_0 NOS ZERO ()
+             ADD channel.itunesowner_0 NOS ZERO ()
+             ADD channel.itunesowner_0.itunesname_0 NOS ZERO ()
+             ADD channel.itunesowner_0.itunesemail_0 NOS ZERO ()
+             ADD channel.itunescategory_0 NOS ZERO ()
+             ADD channel.itunescategory_0.text NOS ZERO ()
+             ADD channel.itunescategory_0.itunescategory_0 NOS ZERO ()
+             ADD channel.itunescategory_0.itunescategory_0.text NOS ZERO ()
+             ADD channel.item NOS ZERO ()
+             ADD channel.item NOS ZERO ()
+             ADD channel.item.guid NOS ZERO ()
+             ADD channel.item.guid.ispermalink NOS ZERO ()
+             ADD channel.item.guid.guid NOS ZERO ()
+             ADD channel.item.title NOS ZERO ()
+             ADD channel.item.description NOS ZERO ()
+             ADD channel.item.pubdate NOS ZERO ()
+             ADD channel.item.author NOS ZERO ()
+             ADD channel.item.link NOS ZERO ()
+             ADD channel.item.mediathumbnail_0 NOS ZERO ()
+             ADD channel.item.mediathumbnail_0.height NOS ZERO ()
+             ADD channel.item.mediathumbnail_0.url NOS ZERO ()
+             ADD channel.item.mediathumbnail_0.width NOS ZERO ()
+             ADD channel.item.contentencoded_0 NOS ZERO ()
+             ADD channel.item.enclosure NOS ZERO ()
+             ADD channel.item.enclosure.length NOS ZERO ()
+             ADD channel.item.enclosure.type NOS ZERO ()
+             ADD channel.item.enclosure.url NOS ZERO ()
+             ADD channel.item.itunestitle_0 NOS ZERO ()
+             ADD channel.item.itunesauthor_0 NOS ZERO ()
+             ADD channel.item.itunesimage_0 NOS ZERO ()
+             ADD channel.item.itunesimage_0.href NOS ZERO ()
+             ADD channel.item.itunesduration_0 NOS ZERO ()
+             ADD channel.item.itunessummary_0 NOS ZERO ()
+             ADD channel.item.itunessubtitle_0 NOS ZERO ()
+             ADD channel.item.itunesexplicit_0 NOS ZERO ()
+             ADD channel.item.itunesepisodetype_0 NOS ZERO ()
+             ADD channel.item.itunesepisode_0 NOS ZERO ()
+        )
+        OUTPUTLIST (channel, version
+        )
+        WRAPPER (xml ds_rss_the_daily)
+    );
+

@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_validation_address FOLDER = '/2 - integration' AS SELECT bv_validation_address.personstreet AS personstreet, bv_validation_address.postalcode AS postalcode, (bv_validation_address.result).address.postaladdress.postalcode AS actualpostalcode, (bv_validation_address.result).geocode.location.latitude AS latitude, (bv_validation_address.result).geocode.location.longitude AS longitude, case WHEN (((result).verdict.inputgranularity = 'OTHER' OR (result).verdict.validationgranularity = 'OTHER' OR (result).verdict.geocodegranularity = 'OTHER')) THEN false ELSE true END AS is_valid FROM bv_validation_address;
+
+ALTER VIEW iv_validation_address
+ LAYOUT (bv_validation_address = [20, 20, 200, 105]);
+

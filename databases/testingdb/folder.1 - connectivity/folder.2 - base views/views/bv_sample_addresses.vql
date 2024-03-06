@@ -1,0 +1,83 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_sample_addresses
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_sample_addresses
+    OUTPUTSCHEMA (
+        lastname_0 = 'Last name' (OPT),
+        firstname_0 = 'First name' (OPT),
+        jobtitle_0 = 'Job title' (OPT),
+        directphonenumber_0 = 'Direct Phone Number' (OPT),
+        emailaddress_0 = 'Email address' (OPT),
+        personstreet_0 = 'Person Street' (OPT),
+        personcity_0 = 'Person City' (OPT),
+        personstate_0 = 'Person State' (OPT),
+        personzip_0 = 'Person Zip' (OPT),
+        country = 'Country' (OPT),
+        companyname_0 = 'Company name' (OPT),
+        companydomainname_0 = 'Company domain name' (OPT),
+        companyphonenumber_0 = 'Company phone number' (OPT),
+        companystreetaddress_0 = 'Company Street address' (OPT),
+        companycity_0 = 'Company City' (OPT),
+        companystate_0 = 'Company State' (OPT),
+        companyzippostalcode_0 = 'Company ZIP/Postal code' (OPT),
+        companycountry_0 = 'Company Country' (OPT),
+        industrylabel_0 = 'Industry label' (OPT),
+        revenuein000s_0 = 'Revenue (in 000s)' (OPT),
+        employees = 'Employees' (OPT)
+    );
+
+CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
+        lastname_0:text,
+        firstname_0:text,
+        jobtitle_0:text,
+        directphonenumber_0:text,
+        emailaddress_0:text,
+        personstreet_0:text,
+        personcity_0:text,
+        personstate_0:text,
+        personzip_0:text,
+        country:text,
+        companyname_0:text,
+        companydomainname_0:text,
+        companyphonenumber_0:text,
+        companystreetaddress_0:text,
+        companycity_0:text,
+        companystate_0:text,
+        companyzippostalcode_0:text,
+        companycountry_0:text,
+        industrylabel_0:text,
+        revenuein000s_0:text,
+        employees:text
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_sample_addresses(
+        I18N us_est
+        CONSTRAINTS (
+             ADD lastname_0 (any) OPT ANY
+             ADD firstname_0 (any) OPT ANY
+             ADD jobtitle_0 (any) OPT ANY
+             ADD directphonenumber_0 (any) OPT ANY
+             ADD emailaddress_0 (any) OPT ANY
+             ADD personstreet_0 (any) OPT ANY
+             ADD personcity_0 (any) OPT ANY
+             ADD personstate_0 (any) OPT ANY
+             ADD personzip_0 (any) OPT ANY
+             ADD country (any) OPT ANY
+             ADD companyname_0 (any) OPT ANY
+             ADD companydomainname_0 (any) OPT ANY
+             ADD companyphonenumber_0 (any) OPT ANY
+             ADD companystreetaddress_0 (any) OPT ANY
+             ADD companycity_0 (any) OPT ANY
+             ADD companystate_0 (any) OPT ANY
+             ADD companyzippostalcode_0 (any) OPT ANY
+             ADD companycountry_0 (any) OPT ANY
+             ADD industrylabel_0 (any) OPT ANY
+             ADD revenuein000s_0 (any) OPT ANY
+             ADD employees (any) OPT ANY
+        )
+        OUTPUTLIST (companycity_0, companycountry_0, companydomainname_0, companyname_0, companyphonenumber_0, companystate_0, companystreetaddress_0, companyzippostalcode_0, country, directphonenumber_0, emailaddress_0, employees, firstname_0, industrylabel_0, jobtitle_0, lastname_0, personcity_0, personstate_0, personstreet_0, personzip_0, revenuein000s_0
+        )
+        WRAPPER (df ds_sample_addresses)
+    );
+

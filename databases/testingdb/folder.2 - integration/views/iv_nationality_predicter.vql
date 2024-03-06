@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_nationality_predicter FOLDER = '/2 - integration' AS SELECT bv_nationality_predicter.name AS name, (bv_nationality_predicter.country)[0].country_id AS predicted_country, (round((cast('double', (bv_nationality_predicter.country)[0].probability)*100), 2)||'%') AS probability, bv_nationality_predicter.country AS country FROM bv_nationality_predicter;
+
+ALTER VIEW iv_nationality_predicter
+ LAYOUT (bv_nationality_predicter = [20, 20, 200, 85]);
+

@@ -1,0 +1,296 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON bv_weather_data
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_weather_data
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.bv_weather_data.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        location_0 = 'LOCATION' : 'java.lang.String' (OBL) (DEFAULTVALUE='miami') EXTERN,
+        location = 'location' : REGISTER OF (
+            name = 'name' : 'java.lang.String',
+            region = 'region' : 'java.lang.String',
+            country = 'country' : 'java.lang.String',
+            lat = 'lat' : 'java.lang.Double',
+            lon = 'lon' : 'java.lang.Double',
+            tz_id = 'tz_id' : 'java.lang.String',
+            localtime_epoch = 'localtime_epoch' : 'java.lang.Integer',
+            localtime_0 = 'localtime' : 'java.lang.String'
+        ),
+        current = 'current' : REGISTER OF (
+            last_updated_epoch = 'last_updated_epoch' : 'java.lang.Integer',
+            last_updated = 'last_updated' : 'java.lang.String',
+            temp_c = 'temp_c' : 'java.lang.Double',
+            temp_f = 'temp_f' : 'java.lang.Double',
+            is_day = 'is_day' : 'java.lang.Integer',
+            condition = 'condition' : REGISTER OF (
+                text = 'text' : 'java.lang.String',
+                icon = 'icon' : 'java.lang.String',
+                code = 'code' : 'java.lang.Integer'
+            ),
+            wind_mph = 'wind_mph' : 'java.lang.Double',
+            wind_kph = 'wind_kph' : 'java.lang.Double',
+            wind_degree = 'wind_degree' : 'java.lang.Integer',
+            wind_dir = 'wind_dir' : 'java.lang.String',
+            pressure_mb = 'pressure_mb' : 'java.lang.Double',
+            pressure_in = 'pressure_in' : 'java.lang.Double',
+            precip_mm = 'precip_mm' : 'java.lang.Double',
+            precip_in = 'precip_in' : 'java.lang.Double',
+            humidity = 'humidity' : 'java.lang.Integer',
+            cloud = 'cloud' : 'java.lang.Integer',
+            feelslike_c = 'feelslike_c' : 'java.lang.Double',
+            feelslike_f = 'feelslike_f' : 'java.lang.Double',
+            vis_km = 'vis_km' : 'java.lang.Double',
+            vis_miles = 'vis_miles' : 'java.lang.Double',
+            uv = 'uv' : 'java.lang.Double',
+            gust_mph = 'gust_mph' : 'java.lang.Double',
+            gust_kph = 'gust_kph' : 'java.lang.Double'
+        ),
+        forecast = 'forecast' : REGISTER OF (
+            forecastday = 'forecastday' : ARRAY OF (
+                forecastday = 'forecastday' : REGISTER OF (
+                    date = 'date' : 'java.lang.String',
+                    date_epoch = 'date_epoch' : 'java.lang.Integer',
+                    day = 'day' : REGISTER OF (
+                        maxtemp_c = 'maxtemp_c' : 'java.lang.Double',
+                        maxtemp_f = 'maxtemp_f' : 'java.lang.Double',
+                        mintemp_c = 'mintemp_c' : 'java.lang.Double',
+                        mintemp_f = 'mintemp_f' : 'java.lang.Double',
+                        avgtemp_c = 'avgtemp_c' : 'java.lang.Double',
+                        avgtemp_f = 'avgtemp_f' : 'java.lang.Double',
+                        maxwind_mph = 'maxwind_mph' : 'java.lang.Double',
+                        maxwind_kph = 'maxwind_kph' : 'java.lang.Double',
+                        totalprecip_mm = 'totalprecip_mm' : 'java.lang.Double',
+                        totalprecip_in = 'totalprecip_in' : 'java.lang.Double',
+                        totalsnow_cm = 'totalsnow_cm' : 'java.lang.Double',
+                        avgvis_km = 'avgvis_km' : 'java.lang.Double',
+                        avgvis_miles = 'avgvis_miles' : 'java.lang.Double',
+                        avghumidity = 'avghumidity' : 'java.lang.Integer',
+                        daily_will_it_rain = 'daily_will_it_rain' : 'java.lang.Integer',
+                        daily_chance_of_rain = 'daily_chance_of_rain' : 'java.lang.Integer',
+                        daily_will_it_snow = 'daily_will_it_snow' : 'java.lang.Integer',
+                        daily_chance_of_snow = 'daily_chance_of_snow' : 'java.lang.Integer',
+                        condition = 'condition' : REGISTER OF (
+                            text = 'text' : 'java.lang.String',
+                            icon = 'icon' : 'java.lang.String',
+                            code = 'code' : 'java.lang.Integer'
+                        ),
+                        uv = 'uv' : 'java.lang.Double'
+                    ),
+                    astro = 'astro' : REGISTER OF (
+                        sunrise = 'sunrise' : 'java.lang.String',
+                        sunset = 'sunset' : 'java.lang.String',
+                        moonrise = 'moonrise' : 'java.lang.String',
+                        moonset = 'moonset' : 'java.lang.String',
+                        moon_phase = 'moon_phase' : 'java.lang.String',
+                        moon_illumination = 'moon_illumination' : 'java.lang.Integer',
+                        is_moon_up = 'is_moon_up' : 'java.lang.Integer',
+                        is_sun_up = 'is_sun_up' : 'java.lang.Integer'
+                    ),
+                    hour = 'hour' : ARRAY OF (
+                        hour = 'hour' : REGISTER OF (
+                            time_epoch = 'time_epoch' : 'java.lang.Integer',
+                            time = 'time' : 'java.lang.String',
+                            temp_c = 'temp_c' : 'java.lang.Double',
+                            temp_f = 'temp_f' : 'java.lang.Double',
+                            is_day = 'is_day' : 'java.lang.Integer',
+                            condition = 'condition' : REGISTER OF (
+                                text = 'text' : 'java.lang.String',
+                                icon = 'icon' : 'java.lang.String',
+                                code = 'code' : 'java.lang.Integer'
+                            ),
+                            wind_mph = 'wind_mph' : 'java.lang.Double',
+                            wind_kph = 'wind_kph' : 'java.lang.Double',
+                            wind_degree = 'wind_degree' : 'java.lang.Integer',
+                            wind_dir = 'wind_dir' : 'java.lang.String',
+                            pressure_mb = 'pressure_mb' : 'java.lang.Double',
+                            pressure_in = 'pressure_in' : 'java.lang.Double',
+                            precip_mm = 'precip_mm' : 'java.lang.Double',
+                            precip_in = 'precip_in' : 'java.lang.Double',
+                            snow_cm = 'snow_cm' : 'java.lang.Double',
+                            humidity = 'humidity' : 'java.lang.Integer',
+                            cloud = 'cloud' : 'java.lang.Integer',
+                            feelslike_c = 'feelslike_c' : 'java.lang.Double',
+                            feelslike_f = 'feelslike_f' : 'java.lang.Double',
+                            windchill_c = 'windchill_c' : 'java.lang.Double',
+                            windchill_f = 'windchill_f' : 'java.lang.Double',
+                            heatindex_c = 'heatindex_c' : 'java.lang.Double',
+                            heatindex_f = 'heatindex_f' : 'java.lang.Double',
+                            dewpoint_c = 'dewpoint_c' : 'java.lang.Double',
+                            dewpoint_f = 'dewpoint_f' : 'java.lang.Double',
+                            will_it_rain = 'will_it_rain' : 'java.lang.Integer',
+                            chance_of_rain = 'chance_of_rain' : 'java.lang.Integer',
+                            will_it_snow = 'will_it_snow' : 'java.lang.Integer',
+                            chance_of_snow = 'chance_of_snow' : 'java.lang.Integer',
+                            vis_km = 'vis_km' : 'java.lang.Double',
+                            vis_miles = 'vis_miles' : 'java.lang.Double',
+                            gust_mph = 'gust_mph' : 'java.lang.Double',
+                            gust_kph = 'gust_kph' : 'java.lang.Double',
+                            uv = 'uv' : 'java.lang.Double',
+                            short_rad = 'short_rad' : 'java.lang.Double',
+                            diff_rad = 'diff_rad' : 'java.lang.Double'
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_weather_data_location AS REGISTER OF (name:text, region:text, country:text, lat:double, lon:double, tz_id:text, localtime_epoch:int, localtime_0:text);
+
+CREATE OR REPLACE TYPE ds_weather_data_current_condition AS REGISTER OF (text:text, icon:text, code:int);
+
+CREATE OR REPLACE TYPE ds_weather_data_current AS REGISTER OF (last_updated_epoch:int, last_updated:text, temp_c:double, temp_f:double, is_day:int, condition:ds_weather_data_current_condition, wind_mph:double, wind_kph:double, wind_degree:int, wind_dir:text, pressure_mb:double, pressure_in:double, precip_mm:double, precip_in:double, humidity:int, cloud:int, feelslike_c:double, feelslike_f:double, vis_km:double, vis_miles:double, uv:double, gust_mph:double, gust_kph:double);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_day_condition AS REGISTER OF (text:text, icon:text, code:int);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_day AS REGISTER OF (maxtemp_c:double, maxtemp_f:double, mintemp_c:double, mintemp_f:double, avgtemp_c:double, avgtemp_f:double, maxwind_mph:double, maxwind_kph:double, totalprecip_mm:double, totalprecip_in:double, totalsnow_cm:double, avgvis_km:double, avgvis_miles:double, avghumidity:int, daily_will_it_rain:int, daily_chance_of_rain:int, daily_will_it_snow:int, daily_chance_of_snow:int, condition:ds_weather_data_forecast_forecastday_forecastday_day_condition, uv:double);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_astro AS REGISTER OF (sunrise:text, sunset:text, moonrise:text, moonset:text, moon_phase:text, moon_illumination:int, is_moon_up:int, is_sun_up:int);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_hour_hour_condition AS REGISTER OF (text:text, icon:text, code:int);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_hour_hour AS REGISTER OF (time_epoch:int, time:text, temp_c:double, temp_f:double, is_day:int, condition:ds_weather_data_forecast_forecastday_forecastday_hour_hour_condition, wind_mph:double, wind_kph:double, wind_degree:int, wind_dir:text, pressure_mb:double, pressure_in:double, precip_mm:double, precip_in:double, snow_cm:double, humidity:int, cloud:int, feelslike_c:double, feelslike_f:double, windchill_c:double, windchill_f:double, heatindex_c:double, heatindex_f:double, dewpoint_c:double, dewpoint_f:double, will_it_rain:int, chance_of_rain:int, will_it_snow:int, chance_of_snow:int, vis_km:double, vis_miles:double, gust_mph:double, gust_kph:double, uv:double, short_rad:double, diff_rad:double);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday_hour AS ARRAY OF ds_weather_data_forecast_forecastday_forecastday_hour_hour;
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday_forecastday AS REGISTER OF (date:text, date_epoch:int, day:ds_weather_data_forecast_forecastday_forecastday_day, astro:ds_weather_data_forecast_forecastday_forecastday_astro, hour:ds_weather_data_forecast_forecastday_forecastday_hour);
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast_forecastday AS ARRAY OF ds_weather_data_forecast_forecastday_forecastday;
+
+CREATE OR REPLACE TYPE ds_weather_data_forecast AS REGISTER OF (forecastday:ds_weather_data_forecast_forecastday);
+
+CREATE OR REPLACE TABLE bv_weather_data I18N us_est (
+        location_0:text (extern),
+        location:ds_weather_data_location,
+        current:ds_weather_data_current,
+        forecast:ds_weather_data_forecast
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_weather_data(
+        I18N us_est
+        CONSTRAINTS (
+             ADD location_0 (=) OBL ONE
+             ADD location NOS ZERO ()
+             ADD location.name NOS ZERO ()
+             ADD location.region NOS ZERO ()
+             ADD location.country NOS ZERO ()
+             ADD location.lat NOS ZERO ()
+             ADD location.lon NOS ZERO ()
+             ADD location.tz_id NOS ZERO ()
+             ADD location.localtime_epoch NOS ZERO ()
+             ADD location.localtime_0 NOS ZERO ()
+             ADD current NOS ZERO ()
+             ADD current.last_updated_epoch NOS ZERO ()
+             ADD current.last_updated NOS ZERO ()
+             ADD current.temp_c NOS ZERO ()
+             ADD current.temp_f NOS ZERO ()
+             ADD current.is_day NOS ZERO ()
+             ADD current.condition NOS ZERO ()
+             ADD current.condition.text NOS ZERO ()
+             ADD current.condition.icon NOS ZERO ()
+             ADD current.condition.code NOS ZERO ()
+             ADD current.wind_mph NOS ZERO ()
+             ADD current.wind_kph NOS ZERO ()
+             ADD current.wind_degree NOS ZERO ()
+             ADD current.wind_dir NOS ZERO ()
+             ADD current.pressure_mb NOS ZERO ()
+             ADD current.pressure_in NOS ZERO ()
+             ADD current.precip_mm NOS ZERO ()
+             ADD current.precip_in NOS ZERO ()
+             ADD current.humidity NOS ZERO ()
+             ADD current.cloud NOS ZERO ()
+             ADD current.feelslike_c NOS ZERO ()
+             ADD current.feelslike_f NOS ZERO ()
+             ADD current.vis_km NOS ZERO ()
+             ADD current.vis_miles NOS ZERO ()
+             ADD current.uv NOS ZERO ()
+             ADD current.gust_mph NOS ZERO ()
+             ADD current.gust_kph NOS ZERO ()
+             ADD forecast NOS ZERO ()
+             ADD forecast.forecastday NOS ZERO ()
+             ADD forecast.forecastday NOS ZERO ()
+             ADD forecast.forecastday.date NOS ZERO ()
+             ADD forecast.forecastday.date_epoch NOS ZERO ()
+             ADD forecast.forecastday.day NOS ZERO ()
+             ADD forecast.forecastday.day.maxtemp_c NOS ZERO ()
+             ADD forecast.forecastday.day.maxtemp_f NOS ZERO ()
+             ADD forecast.forecastday.day.mintemp_c NOS ZERO ()
+             ADD forecast.forecastday.day.mintemp_f NOS ZERO ()
+             ADD forecast.forecastday.day.avgtemp_c NOS ZERO ()
+             ADD forecast.forecastday.day.avgtemp_f NOS ZERO ()
+             ADD forecast.forecastday.day.maxwind_mph NOS ZERO ()
+             ADD forecast.forecastday.day.maxwind_kph NOS ZERO ()
+             ADD forecast.forecastday.day.totalprecip_mm NOS ZERO ()
+             ADD forecast.forecastday.day.totalprecip_in NOS ZERO ()
+             ADD forecast.forecastday.day.totalsnow_cm NOS ZERO ()
+             ADD forecast.forecastday.day.avgvis_km NOS ZERO ()
+             ADD forecast.forecastday.day.avgvis_miles NOS ZERO ()
+             ADD forecast.forecastday.day.avghumidity NOS ZERO ()
+             ADD forecast.forecastday.day.daily_will_it_rain NOS ZERO ()
+             ADD forecast.forecastday.day.daily_chance_of_rain NOS ZERO ()
+             ADD forecast.forecastday.day.daily_will_it_snow NOS ZERO ()
+             ADD forecast.forecastday.day.daily_chance_of_snow NOS ZERO ()
+             ADD forecast.forecastday.day.condition NOS ZERO ()
+             ADD forecast.forecastday.day.condition.text NOS ZERO ()
+             ADD forecast.forecastday.day.condition.icon NOS ZERO ()
+             ADD forecast.forecastday.day.condition.code NOS ZERO ()
+             ADD forecast.forecastday.day.uv NOS ZERO ()
+             ADD forecast.forecastday.astro NOS ZERO ()
+             ADD forecast.forecastday.astro.sunrise NOS ZERO ()
+             ADD forecast.forecastday.astro.sunset NOS ZERO ()
+             ADD forecast.forecastday.astro.moonrise NOS ZERO ()
+             ADD forecast.forecastday.astro.moonset NOS ZERO ()
+             ADD forecast.forecastday.astro.moon_phase NOS ZERO ()
+             ADD forecast.forecastday.astro.moon_illumination NOS ZERO ()
+             ADD forecast.forecastday.astro.is_moon_up NOS ZERO ()
+             ADD forecast.forecastday.astro.is_sun_up NOS ZERO ()
+             ADD forecast.forecastday.hour NOS ZERO ()
+             ADD forecast.forecastday.hour NOS ZERO ()
+             ADD forecast.forecastday.hour.time_epoch NOS ZERO ()
+             ADD forecast.forecastday.hour.time NOS ZERO ()
+             ADD forecast.forecastday.hour.temp_c NOS ZERO ()
+             ADD forecast.forecastday.hour.temp_f NOS ZERO ()
+             ADD forecast.forecastday.hour.is_day NOS ZERO ()
+             ADD forecast.forecastday.hour.condition NOS ZERO ()
+             ADD forecast.forecastday.hour.condition.text NOS ZERO ()
+             ADD forecast.forecastday.hour.condition.icon NOS ZERO ()
+             ADD forecast.forecastday.hour.condition.code NOS ZERO ()
+             ADD forecast.forecastday.hour.wind_mph NOS ZERO ()
+             ADD forecast.forecastday.hour.wind_kph NOS ZERO ()
+             ADD forecast.forecastday.hour.wind_degree NOS ZERO ()
+             ADD forecast.forecastday.hour.wind_dir NOS ZERO ()
+             ADD forecast.forecastday.hour.pressure_mb NOS ZERO ()
+             ADD forecast.forecastday.hour.pressure_in NOS ZERO ()
+             ADD forecast.forecastday.hour.precip_mm NOS ZERO ()
+             ADD forecast.forecastday.hour.precip_in NOS ZERO ()
+             ADD forecast.forecastday.hour.snow_cm NOS ZERO ()
+             ADD forecast.forecastday.hour.humidity NOS ZERO ()
+             ADD forecast.forecastday.hour.cloud NOS ZERO ()
+             ADD forecast.forecastday.hour.feelslike_c NOS ZERO ()
+             ADD forecast.forecastday.hour.feelslike_f NOS ZERO ()
+             ADD forecast.forecastday.hour.windchill_c NOS ZERO ()
+             ADD forecast.forecastday.hour.windchill_f NOS ZERO ()
+             ADD forecast.forecastday.hour.heatindex_c NOS ZERO ()
+             ADD forecast.forecastday.hour.heatindex_f NOS ZERO ()
+             ADD forecast.forecastday.hour.dewpoint_c NOS ZERO ()
+             ADD forecast.forecastday.hour.dewpoint_f NOS ZERO ()
+             ADD forecast.forecastday.hour.will_it_rain NOS ZERO ()
+             ADD forecast.forecastday.hour.chance_of_rain NOS ZERO ()
+             ADD forecast.forecastday.hour.will_it_snow NOS ZERO ()
+             ADD forecast.forecastday.hour.chance_of_snow NOS ZERO ()
+             ADD forecast.forecastday.hour.vis_km NOS ZERO ()
+             ADD forecast.forecastday.hour.vis_miles NOS ZERO ()
+             ADD forecast.forecastday.hour.gust_mph NOS ZERO ()
+             ADD forecast.forecastday.hour.gust_kph NOS ZERO ()
+             ADD forecast.forecastday.hour.uv NOS ZERO ()
+             ADD forecast.forecastday.hour.short_rad NOS ZERO ()
+             ADD forecast.forecastday.hour.diff_rad NOS ZERO ()
+        )
+        OUTPUTLIST (current, forecast, location
+        )
+        WRAPPER (json bv_weather_data)
+    );
+

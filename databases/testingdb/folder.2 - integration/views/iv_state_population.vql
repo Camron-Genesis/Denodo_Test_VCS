@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_state_population FOLDER = '/2 - integration' AS SELECT (jsonarray)[0].field_0 AS state_name, (jsonarray)[1].field_0 AS population, (jsonarray)[2].field_0 AS state FROM FLATTEN bv_state_population AS v ( v.jsonarray);
+
+ALTER VIEW iv_state_population
+ LAYOUT (bv_state_population = [20, 20, 200, 45]);
+

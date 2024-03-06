@@ -1,0 +1,148 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON bv_geocoding
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_geocoding
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.bv_geocoding.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        street_address = 'STREET_ADDRESS' : 'java.lang.String' (OBL) (DEFAULTVALUE='1014 Salzedo St') EXTERN,
+        postal_code = 'POSTAL_CODE' : 'java.lang.String' (OBL) (DEFAULTVALUE='33134') EXTERN,
+        results = 'results' : ARRAY OF (
+            results = 'results' : REGISTER OF (
+                address_components = 'address_components' : ARRAY OF (
+                    address_components = 'address_components' : REGISTER OF (
+                        long_name = 'long_name' : 'java.lang.String',
+                        short_name = 'short_name' : 'java.lang.String',
+                        types = 'types' : ARRAY OF (
+                            types = 'types' : REGISTER OF (
+                                field_0 = 'field_0' : 'java.lang.String'
+                            )
+                        )
+                    )
+                ),
+                formatted_address = 'formatted_address' : 'java.lang.String',
+                geometry = 'geometry' : REGISTER OF (
+                    bounds = 'bounds' : REGISTER OF (
+                        northeast = 'northeast' : REGISTER OF (
+                            lat = 'lat' : 'java.lang.Double',
+                            lng = 'lng' : 'java.lang.Double'
+                        ),
+                        southwest = 'southwest' : REGISTER OF (
+                            lat = 'lat' : 'java.lang.Double',
+                            lng = 'lng' : 'java.lang.Double'
+                        )
+                    ),
+                    location = 'location' : REGISTER OF (
+                        lat = 'lat' : 'java.lang.Double',
+                        lng = 'lng' : 'java.lang.Double'
+                    ),
+                    location_type = 'location_type' : 'java.lang.String',
+                    viewport = 'viewport' : REGISTER OF (
+                        northeast = 'northeast' : REGISTER OF (
+                            lat = 'lat' : 'java.lang.Double',
+                            lng = 'lng' : 'java.lang.Double'
+                        ),
+                        southwest = 'southwest' : REGISTER OF (
+                            lat = 'lat' : 'java.lang.Double',
+                            lng = 'lng' : 'java.lang.Double'
+                        )
+                    )
+                ),
+                place_id = 'place_id' : 'java.lang.String',
+                types = 'types' : ARRAY OF (
+                    types = 'types' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                )
+            )
+        ),
+        status = 'status' : 'java.lang.String'
+    )
+    );
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_address_components_address_components_types_types AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_address_components_address_components_types AS ARRAY OF bv_geocoding_results_results_address_components_address_components_types_types;
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_address_components_address_components AS REGISTER OF (long_name:text, short_name:text, types:bv_geocoding_results_results_address_components_address_components_types);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_address_components AS ARRAY OF bv_geocoding_results_results_address_components_address_components;
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_bounds_northeast AS REGISTER OF (lat:double, lng:double);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_bounds_southwest AS REGISTER OF (lat:double, lng:double);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_bounds AS REGISTER OF (northeast:bv_geocoding_results_results_geometry_bounds_northeast, southwest:bv_geocoding_results_results_geometry_bounds_southwest);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_location AS REGISTER OF (lat:double, lng:double);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_viewport_northeast AS REGISTER OF (lat:double, lng:double);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_viewport_southwest AS REGISTER OF (lat:double, lng:double);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry_viewport AS REGISTER OF (northeast:bv_geocoding_results_results_geometry_viewport_northeast, southwest:bv_geocoding_results_results_geometry_viewport_southwest);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_geometry AS REGISTER OF (bounds:bv_geocoding_results_results_geometry_bounds, location:bv_geocoding_results_results_geometry_location, location_type:text, viewport:bv_geocoding_results_results_geometry_viewport);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_types_types AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE bv_geocoding_results_results_types AS ARRAY OF bv_geocoding_results_results_types_types;
+
+CREATE OR REPLACE TYPE "bv_geocoding_results_results_b30b03a6-d285-4122-ba9e-ae0a3dc7d718" AS REGISTER OF (address_components:bv_geocoding_results_results_address_components, formatted_address:text, geometry:bv_geocoding_results_results_geometry, place_id:text, types:bv_geocoding_results_results_types);
+
+CREATE OR REPLACE TYPE bv_geocoding_results AS ARRAY OF "bv_geocoding_results_results_b30b03a6-d285-4122-ba9e-ae0a3dc7d718";
+
+CREATE OR REPLACE TABLE bv_geocoding I18N us_est (
+        street_address:text (extern),
+        postal_code:text (extern),
+        results:bv_geocoding_results,
+        status:text
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_geocoding(
+        I18N us_est
+        CONSTRAINTS (
+             ADD street_address (=) OBL ONE
+             ADD postal_code (=) OBL ONE
+             ADD results NOS ZERO ()
+             ADD results NOS ZERO ()
+             ADD results.address_components NOS ZERO ()
+             ADD results.address_components NOS ZERO ()
+             ADD results.address_components.long_name NOS ZERO ()
+             ADD results.address_components.short_name NOS ZERO ()
+             ADD results.address_components.types NOS ZERO ()
+             ADD results.address_components.types NOS ZERO ()
+             ADD results.address_components.types.field_0 NOS ZERO ()
+             ADD results.formatted_address NOS ZERO ()
+             ADD results.geometry NOS ZERO ()
+             ADD results.geometry.bounds NOS ZERO ()
+             ADD results.geometry.bounds.northeast NOS ZERO ()
+             ADD results.geometry.bounds.northeast.lat NOS ZERO ()
+             ADD results.geometry.bounds.northeast.lng NOS ZERO ()
+             ADD results.geometry.bounds.southwest NOS ZERO ()
+             ADD results.geometry.bounds.southwest.lat NOS ZERO ()
+             ADD results.geometry.bounds.southwest.lng NOS ZERO ()
+             ADD results.geometry.location NOS ZERO ()
+             ADD results.geometry.location.lat NOS ZERO ()
+             ADD results.geometry.location.lng NOS ZERO ()
+             ADD results.geometry.location_type NOS ZERO ()
+             ADD results.geometry.viewport NOS ZERO ()
+             ADD results.geometry.viewport.northeast NOS ZERO ()
+             ADD results.geometry.viewport.northeast.lat NOS ZERO ()
+             ADD results.geometry.viewport.northeast.lng NOS ZERO ()
+             ADD results.geometry.viewport.southwest NOS ZERO ()
+             ADD results.geometry.viewport.southwest.lat NOS ZERO ()
+             ADD results.geometry.viewport.southwest.lng NOS ZERO ()
+             ADD results.place_id NOS ZERO ()
+             ADD results.types NOS ZERO ()
+             ADD results.types NOS ZERO ()
+             ADD results.types.field_0 NOS ZERO ()
+             ADD status NOS ZERO ()
+        )
+        OUTPUTLIST (results, status
+        )
+        WRAPPER (json bv_geocoding)
+    );
+

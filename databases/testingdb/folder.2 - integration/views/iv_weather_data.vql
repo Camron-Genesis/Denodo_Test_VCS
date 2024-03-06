@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW iv_weather_data FOLDER = '/2 - integration' AS SELECT bv_weather_data.location_0 AS location_0, (bv_weather_data.current).temp_c AS temp_c, (bv_weather_data.current).temp_f AS temp_f, (bv_weather_data.current).last_updated AS last_updated, (bv_weather_data.current).condition.text AS text, (bv_weather_data.current).precip_in AS precip_in FROM bv_weather_data;
+

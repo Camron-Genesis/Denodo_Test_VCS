@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW iv_home_addresses FOLDER = '/2 - integration' AS SELECT bv_sample_addresses.lastname_0 AS lastname_0, bv_sample_addresses.firstname_0 AS firstname_0, bv_sample_addresses.jobtitle_0 AS jobtitle_0, bv_sample_addresses.personstreet_0 AS personstreet_0, bv_sample_addresses.personcity_0 AS personcity_0, bv_sample_addresses.personstate_0 AS personstate_0, bv_sample_addresses.personzip_0 AS personzip_0, bv_sample_addresses.country AS country FROM bv_sample_addresses;
+

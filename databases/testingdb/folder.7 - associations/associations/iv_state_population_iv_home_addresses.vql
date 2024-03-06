@@ -1,0 +1,9 @@
+﻿CREATE OR REPLACE ASSOCIATION iv_state_population_iv_home_addresses REFERENTIAL CONSTRAINT 
+FOLDER = '/7 - associations'
+    ENDPOINT iv_home_addresses iv_state_population (0,*)
+    ENDPOINT iv_state_population iv_home_addresses PRINCIPAL (0,1)
+    ADD MAPPING state_name=personstate_0;
+
+ALTER ASSOCIATION iv_state_population_iv_home_addresses
+ LAYOUT (iv_state_population = [60, 170, 200, 99], iv_home_addresses = [340, 170, 200, 185]);
+

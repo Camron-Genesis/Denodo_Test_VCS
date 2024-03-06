@@ -1,0 +1,266 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON bv_validation_address
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_validation_address
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' POST '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.bv_validation_address.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        personstreet = 'PERSONSTREET' : 'java.lang.String' (OBL) (DEFAULTVALUE='1014 Salzedo St') EXTERN,
+        postalcode = 'POSTALCODE' : 'java.lang.String' (OBL) (DEFAULTVALUE='33134') EXTERN,
+        result = 'result' : REGISTER OF (
+            verdict = 'verdict' : REGISTER OF (
+                inputgranularity = 'inputGranularity' : 'java.lang.String',
+                validationgranularity = 'validationGranularity' : 'java.lang.String',
+                geocodegranularity = 'geocodeGranularity' : 'java.lang.String',
+                hasinferredcomponents = 'hasInferredComponents' : 'java.lang.String'
+            ),
+            address = 'address' : REGISTER OF (
+                formattedaddress = 'formattedAddress' : 'java.lang.String',
+                postaladdress = 'postalAddress' : REGISTER OF (
+                    regioncode = 'regionCode' : 'java.lang.String',
+                    languagecode = 'languageCode' : 'java.lang.String',
+                    postalcode = 'postalCode' : 'java.lang.String',
+                    administrativearea = 'administrativeArea' : 'java.lang.String',
+                    locality = 'locality' : 'java.lang.String',
+                    addresslines = 'addressLines' : ARRAY OF (
+                        addresslines = 'addressLines' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    )
+                ),
+                addresscomponents = 'addressComponents' : ARRAY OF (
+                    addresscomponents = 'addressComponents' : REGISTER OF (
+                        componentname = 'componentName' : REGISTER OF (
+                            text = 'text' : 'java.lang.String',
+                            languagecode = 'languageCode' : 'java.lang.String'
+                        ),
+                        componenttype = 'componentType' : 'java.lang.String',
+                        confirmationlevel = 'confirmationLevel' : 'java.lang.String',
+                        inferred = 'inferred' : 'java.lang.String'
+                    )
+                ),
+                missingcomponenttypes = 'missingComponentTypes' : ARRAY OF (
+                    missingcomponenttypes = 'missingComponentTypes' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                )
+            ),
+            geocode = 'geocode' : REGISTER OF (
+                location = 'location' : REGISTER OF (
+                    latitude = 'latitude' : 'java.lang.Double',
+                    longitude = 'longitude' : 'java.lang.Double'
+                ),
+                pluscode = 'plusCode' : REGISTER OF (
+                    globalcode = 'globalCode' : 'java.lang.String'
+                ),
+                bounds = 'bounds' : REGISTER OF (
+                    low = 'low' : REGISTER OF (
+                        latitude = 'latitude' : 'java.lang.Double',
+                        longitude = 'longitude' : 'java.lang.Double'
+                    ),
+                    high = 'high' : REGISTER OF (
+                        latitude = 'latitude' : 'java.lang.Double',
+                        longitude = 'longitude' : 'java.lang.Double'
+                    )
+                ),
+                featuresizemeters = 'featureSizeMeters' : 'java.lang.Double',
+                placeid = 'placeId' : 'java.lang.String',
+                placetypes = 'placeTypes' : ARRAY OF (
+                    placetypes = 'placeTypes' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                )
+            ),
+            metadata = 'metadata' : REGISTER OF (
+                business = 'business' : 'java.lang.String',
+                pobox = 'poBox' : 'java.lang.String',
+                residential = 'residential' : 'java.lang.String'
+            ),
+            uspsdata = 'uspsData' : REGISTER OF (
+                standardizedaddress = 'standardizedAddress' : REGISTER OF (
+                    firstaddressline = 'firstAddressLine' : 'java.lang.String',
+                    citystatezipaddressline = 'cityStateZipAddressLine' : 'java.lang.String',
+                    city = 'city' : 'java.lang.String',
+                    state = 'state' : 'java.lang.String',
+                    zipcode = 'zipCode' : 'java.lang.String',
+                    zipcodeextension = 'zipCodeExtension' : 'java.lang.String'
+                ),
+                deliverypointcode = 'deliveryPointCode' : 'java.lang.String',
+                deliverypointcheckdigit = 'deliveryPointCheckDigit' : 'java.lang.String',
+                dpvconfirmation = 'dpvConfirmation' : 'java.lang.String',
+                dpvfootnote = 'dpvFootnote' : 'java.lang.String',
+                dpvcmra = 'dpvCmra' : 'java.lang.String',
+                dpvvacant = 'dpvVacant' : 'java.lang.String',
+                dpvnostat = 'dpvNoStat' : 'java.lang.String',
+                carrierroute = 'carrierRoute' : 'java.lang.String',
+                carrierrouteindicator = 'carrierRouteIndicator' : 'java.lang.String',
+                postofficecity = 'postOfficeCity' : 'java.lang.String',
+                postofficestate = 'postOfficeState' : 'java.lang.String',
+                fipscountycode = 'fipsCountyCode' : 'java.lang.String',
+                county = 'county' : 'java.lang.String',
+                elotnumber = 'elotNumber' : 'java.lang.String',
+                elotflag = 'elotFlag' : 'java.lang.String',
+                addressrecordtype = 'addressRecordType' : 'java.lang.String',
+                defaultaddress = 'defaultAddress' : 'java.lang.String',
+                dpvnostatreasoncode = 'dpvNoStatReasonCode' : 'java.lang.Integer',
+                dpvdrop = 'dpvDrop' : 'java.lang.String',
+                dpvthrowback = 'dpvThrowback' : 'java.lang.String',
+                dpvnondeliverydays = 'dpvNonDeliveryDays' : 'java.lang.String',
+                dpvnosecurelocation = 'dpvNoSecureLocation' : 'java.lang.String',
+                dpvpbsa = 'dpvPbsa' : 'java.lang.String',
+                dpvdoornotaccessible = 'dpvDoorNotAccessible' : 'java.lang.String',
+                dpvenhanceddeliverycode = 'dpvEnhancedDeliveryCode' : 'java.lang.String'
+            )
+        ),
+        responseid = 'responseId' : 'java.lang.String'
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_validation_address_result_verdict AS REGISTER OF (inputgranularity:text, validationgranularity:text, geocodegranularity:text, hasinferredcomponents:text);
+
+CREATE OR REPLACE TYPE bv_validation_address_result_address_postaladdress_addresslines_addresslines AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_address_postaladdress_addresslines AS ARRAY OF bv_validation_address_result_address_postaladdress_addresslines_addresslines;
+
+CREATE OR REPLACE TYPE ds_validation_address_result_address_postaladdress AS REGISTER OF (regioncode:text, languagecode:text, postalcode:text, administrativearea:text, locality:text, addresslines:ds_validation_address_result_address_postaladdress_addresslines);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_address_addresscomponents_addresscomponents_componentname AS REGISTER OF (text:text, languagecode:text);
+
+CREATE OR REPLACE TYPE bv_validation_address_result_address_addresscomponents_addresscomponents AS REGISTER OF (componentname:ds_validation_address_result_address_addresscomponents_addresscomponents_componentname, componenttype:text, confirmationlevel:text, inferred:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_address_addresscomponents AS ARRAY OF bv_validation_address_result_address_addresscomponents_addresscomponents;
+
+CREATE OR REPLACE TYPE bv_validation_address_result_address_missingcomponenttypes_missingcomponenttypes AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_address_missingcomponenttypes AS ARRAY OF bv_validation_address_result_address_missingcomponenttypes_missingcomponenttypes;
+
+CREATE OR REPLACE TYPE bv_validation_address_result_address AS REGISTER OF (formattedaddress:text, postaladdress:ds_validation_address_result_address_postaladdress, addresscomponents:ds_validation_address_result_address_addresscomponents, missingcomponenttypes:ds_validation_address_result_address_missingcomponenttypes);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_location AS REGISTER OF (latitude:double, longitude:double);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_pluscode AS REGISTER OF (globalcode:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_bounds_low AS REGISTER OF (latitude:double, longitude:double);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_bounds_high AS REGISTER OF (latitude:double, longitude:double);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_bounds AS REGISTER OF (low:ds_validation_address_result_geocode_bounds_low, high:ds_validation_address_result_geocode_bounds_high);
+
+CREATE OR REPLACE TYPE bv_validation_address_result_geocode_placetypes_placetypes AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_geocode_placetypes AS ARRAY OF bv_validation_address_result_geocode_placetypes_placetypes;
+
+CREATE OR REPLACE TYPE bv_validation_address_result_geocode AS REGISTER OF (location:ds_validation_address_result_geocode_location, pluscode:ds_validation_address_result_geocode_pluscode, bounds:ds_validation_address_result_geocode_bounds, featuresizemeters:double, placeid:text, placetypes:ds_validation_address_result_geocode_placetypes);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_metadata AS REGISTER OF (business:text, pobox:text, residential:text);
+
+CREATE OR REPLACE TYPE ds_validation_address_result_uspsdata_standardizedaddress AS REGISTER OF (firstaddressline:text, citystatezipaddressline:text, city:text, state:text, zipcode:text, zipcodeextension:text);
+
+CREATE OR REPLACE TYPE "ds_validation_address_result_uspsdata_61517495-a6b6-4faf-9b5a-eacb78863ebd" AS REGISTER OF (standardizedaddress:ds_validation_address_result_uspsdata_standardizedaddress, deliverypointcode:text, deliverypointcheckdigit:text, dpvconfirmation:text, dpvfootnote:text, dpvcmra:text, dpvvacant:text, dpvnostat:text, carrierroute:text, carrierrouteindicator:text, postofficecity:text, postofficestate:text, fipscountycode:text, county:text, elotnumber:text, elotflag:text, addressrecordtype:text, defaultaddress:text, dpvnostatreasoncode:int, dpvdrop:text, dpvthrowback:text, dpvnondeliverydays:text, dpvnosecurelocation:text, dpvpbsa:text, dpvdoornotaccessible:text, dpvenhanceddeliverycode:text);
+
+CREATE OR REPLACE TYPE bv_validation_address_result AS REGISTER OF (verdict:ds_validation_address_result_verdict, address:bv_validation_address_result_address, geocode:bv_validation_address_result_geocode, metadata:ds_validation_address_result_metadata, uspsdata:"ds_validation_address_result_uspsdata_61517495-a6b6-4faf-9b5a-eacb78863ebd");
+
+CREATE OR REPLACE TABLE bv_validation_address I18N us_est (
+        personstreet:text (extern),
+        postalcode:text (extern),
+        result:bv_validation_address_result,
+        responseid:text
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_validation_address(
+        I18N us_est
+        CONSTRAINTS (
+             ADD personstreet (=) OBL ONE
+             ADD postalcode (=) OBL ONE
+             ADD result NOS ZERO ()
+             ADD result.verdict NOS ZERO ()
+             ADD result.verdict.inputgranularity NOS ZERO ()
+             ADD result.verdict.validationgranularity NOS ZERO ()
+             ADD result.verdict.geocodegranularity NOS ZERO ()
+             ADD result.verdict.hasinferredcomponents NOS ZERO ()
+             ADD result.address NOS ZERO ()
+             ADD result.address.formattedaddress NOS ZERO ()
+             ADD result.address.postaladdress NOS ZERO ()
+             ADD result.address.postaladdress.regioncode NOS ZERO ()
+             ADD result.address.postaladdress.languagecode NOS ZERO ()
+             ADD result.address.postaladdress.postalcode NOS ZERO ()
+             ADD result.address.postaladdress.administrativearea NOS ZERO ()
+             ADD result.address.postaladdress.locality NOS ZERO ()
+             ADD result.address.postaladdress.addresslines NOS ZERO ()
+             ADD result.address.postaladdress.addresslines NOS ZERO ()
+             ADD result.address.postaladdress.addresslines.field_0 NOS ZERO ()
+             ADD result.address.addresscomponents NOS ZERO ()
+             ADD result.address.addresscomponents NOS ZERO ()
+             ADD result.address.addresscomponents.componentname NOS ZERO ()
+             ADD result.address.addresscomponents.componentname.text NOS ZERO ()
+             ADD result.address.addresscomponents.componentname.languagecode NOS ZERO ()
+             ADD result.address.addresscomponents.componenttype NOS ZERO ()
+             ADD result.address.addresscomponents.confirmationlevel NOS ZERO ()
+             ADD result.address.addresscomponents.inferred NOS ZERO ()
+             ADD result.address.missingcomponenttypes NOS ZERO ()
+             ADD result.address.missingcomponenttypes NOS ZERO ()
+             ADD result.address.missingcomponenttypes.field_0 NOS ZERO ()
+             ADD result.geocode NOS ZERO ()
+             ADD result.geocode.location NOS ZERO ()
+             ADD result.geocode.location.latitude NOS ZERO ()
+             ADD result.geocode.location.longitude NOS ZERO ()
+             ADD result.geocode.pluscode NOS ZERO ()
+             ADD result.geocode.pluscode.globalcode NOS ZERO ()
+             ADD result.geocode.bounds NOS ZERO ()
+             ADD result.geocode.bounds.low NOS ZERO ()
+             ADD result.geocode.bounds.low.latitude NOS ZERO ()
+             ADD result.geocode.bounds.low.longitude NOS ZERO ()
+             ADD result.geocode.bounds.high NOS ZERO ()
+             ADD result.geocode.bounds.high.latitude NOS ZERO ()
+             ADD result.geocode.bounds.high.longitude NOS ZERO ()
+             ADD result.geocode.featuresizemeters NOS ZERO ()
+             ADD result.geocode.placeid NOS ZERO ()
+             ADD result.geocode.placetypes NOS ZERO ()
+             ADD result.geocode.placetypes NOS ZERO ()
+             ADD result.geocode.placetypes.field_0 NOS ZERO ()
+             ADD result.metadata NOS ZERO ()
+             ADD result.metadata.business NOS ZERO ()
+             ADD result.metadata.pobox NOS ZERO ()
+             ADD result.metadata.residential NOS ZERO ()
+             ADD result.uspsdata NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.firstaddressline NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.citystatezipaddressline NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.city NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.state NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.zipcode NOS ZERO ()
+             ADD result.uspsdata.standardizedaddress.zipcodeextension NOS ZERO ()
+             ADD result.uspsdata.deliverypointcode NOS ZERO ()
+             ADD result.uspsdata.deliverypointcheckdigit NOS ZERO ()
+             ADD result.uspsdata.dpvconfirmation NOS ZERO ()
+             ADD result.uspsdata.dpvfootnote NOS ZERO ()
+             ADD result.uspsdata.dpvcmra NOS ZERO ()
+             ADD result.uspsdata.dpvvacant NOS ZERO ()
+             ADD result.uspsdata.dpvnostat NOS ZERO ()
+             ADD result.uspsdata.carrierroute NOS ZERO ()
+             ADD result.uspsdata.carrierrouteindicator NOS ZERO ()
+             ADD result.uspsdata.postofficecity NOS ZERO ()
+             ADD result.uspsdata.postofficestate NOS ZERO ()
+             ADD result.uspsdata.fipscountycode NOS ZERO ()
+             ADD result.uspsdata.county NOS ZERO ()
+             ADD result.uspsdata.elotnumber NOS ZERO ()
+             ADD result.uspsdata.elotflag NOS ZERO ()
+             ADD result.uspsdata.addressrecordtype NOS ZERO ()
+             ADD result.uspsdata.defaultaddress NOS ZERO ()
+             ADD result.uspsdata.dpvnostatreasoncode NOS ZERO ()
+             ADD result.uspsdata.dpvdrop NOS ZERO ()
+             ADD result.uspsdata.dpvthrowback NOS ZERO ()
+             ADD result.uspsdata.dpvnondeliverydays NOS ZERO ()
+             ADD result.uspsdata.dpvnosecurelocation NOS ZERO ()
+             ADD result.uspsdata.dpvpbsa NOS ZERO ()
+             ADD result.uspsdata.dpvdoornotaccessible NOS ZERO ()
+             ADD result.uspsdata.dpvenhanceddeliverycode NOS ZERO ()
+             ADD responseid NOS ZERO ()
+        )
+        OUTPUTLIST (responseid, result
+        )
+        WRAPPER (json bv_validation_address)
+    );
+

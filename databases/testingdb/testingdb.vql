@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE testingdb '';
+
+ALTER DATABASE testingdb
+  CHARSET DEFAULT;
+

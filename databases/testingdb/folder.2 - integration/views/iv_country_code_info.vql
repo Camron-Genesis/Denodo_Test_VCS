@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_country_code_info FOLDER = '/2 - integration' AS SELECT country_code AS country_code, (name).official AS country_name, (currencies).usd.name AS currency_name FROM FLATTEN bv_country_code_info AS v ( v.jsonarray);
+
+ALTER VIEW iv_country_code_info
+ LAYOUT (bv_country_code_info = [20, 20, 200, 65]);
+

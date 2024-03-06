@@ -1,0 +1,6 @@
+﻿/databases/testingdb/folder.2 - integration/2 - integration.vql
+/databases/testingdb/folder.1 - connectivity/1 - connectivity.vql
+/databases/testingdb/folder.1 - connectivity/folder.2 - base views/2 - base views.vql
+/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/1 - data sources.vql
+/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_validation_address.vql
+/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_validation_address.vql

@@ -1,0 +1,549 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON ds_country_code_info
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_country_code_info
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.ds_country_code_info.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        country_code = 'COUNTRY_CODE' : 'java.lang.String' (OBL) (DEFAULTVALUE='US') EXTERN,
+        jsonarray = 'JSONArray' : ARRAY OF (
+            jsonarray = 'JSONArray' : REGISTER OF (
+                name = 'name' : REGISTER OF (
+                    common = 'common' : 'java.lang.String',
+                    official = 'official' : 'java.lang.String',
+                    nativename = 'nativeName' : REGISTER OF (
+                        eng = 'eng' : REGISTER OF (
+                            official = 'official' : 'java.lang.String',
+                            common = 'common' : 'java.lang.String'
+                        )
+                    )
+                ),
+                tld = 'tld' : ARRAY OF (
+                    tld = 'tld' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                cca2 = 'cca2' : 'java.lang.String',
+                ccn3 = 'ccn3' : 'java.lang.String',
+                cca3 = 'cca3' : 'java.lang.String',
+                cioc = 'cioc' : 'java.lang.String',
+                independent = 'independent' : 'java.lang.String',
+                status = 'status' : 'java.lang.String',
+                unmember = 'unMember' : 'java.lang.String',
+                currencies = 'currencies' : REGISTER OF (
+                    usd = 'USD' : REGISTER OF (
+                        name = 'name' : 'java.lang.String',
+                        symbol = 'symbol' : 'java.lang.String'
+                    )
+                ),
+                idd = 'idd' : REGISTER OF (
+                    root = 'root' : 'java.lang.String',
+                    suffixes = 'suffixes' : ARRAY OF (
+                        suffixes = 'suffixes' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    )
+                ),
+                capital = 'capital' : ARRAY OF (
+                    capital = 'capital' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                altspellings = 'altSpellings' : ARRAY OF (
+                    altspellings = 'altSpellings' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                region = 'region' : 'java.lang.String',
+                subregion = 'subregion' : 'java.lang.String',
+                languages = 'languages' : REGISTER OF (
+                    eng = 'eng' : 'java.lang.String'
+                ),
+                translations = 'translations' : REGISTER OF (
+                    ara = 'ara' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    bre = 'bre' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    ces = 'ces' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    cym = 'cym' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    deu = 'deu' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    est = 'est' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    fin = 'fin' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    fra = 'fra' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    hrv = 'hrv' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    hun = 'hun' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    ita = 'ita' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    jpn = 'jpn' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    kor = 'kor' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    nld = 'nld' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    per = 'per' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    pol = 'pol' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    por = 'por' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    rus = 'rus' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    slk = 'slk' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    spa = 'spa' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    srp = 'srp' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    swe = 'swe' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    tur = 'tur' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    urd = 'urd' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    ),
+                    zho = 'zho' : REGISTER OF (
+                        official = 'official' : 'java.lang.String',
+                        common = 'common' : 'java.lang.String'
+                    )
+                ),
+                latlng = 'latlng' : ARRAY OF (
+                    latlng = 'latlng' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.Double'
+                    )
+                ),
+                landlocked = 'landlocked' : 'java.lang.String',
+                borders = 'borders' : ARRAY OF (
+                    borders = 'borders' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                area = 'area' : 'java.lang.Double',
+                demonyms = 'demonyms' : REGISTER OF (
+                    eng = 'eng' : REGISTER OF (
+                        f = 'f' : 'java.lang.String',
+                        m = 'm' : 'java.lang.String'
+                    ),
+                    fra = 'fra' : REGISTER OF (
+                        f = 'f' : 'java.lang.String',
+                        m = 'm' : 'java.lang.String'
+                    )
+                ),
+                flag = 'flag' : 'java.lang.String',
+                maps = 'maps' : REGISTER OF (
+                    googlemaps = 'googleMaps' : 'java.lang.String',
+                    openstreetmaps = 'openStreetMaps' : 'java.lang.String'
+                ),
+                population = 'population' : 'java.lang.Integer',
+                gini = 'gini' : REGISTER OF (
+                    id_0 = '2018' : 'java.lang.Double'
+                ),
+                fifa = 'fifa' : 'java.lang.String',
+                car = 'car' : REGISTER OF (
+                    signs = 'signs' : ARRAY OF (
+                        signs = 'signs' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    side = 'side' : 'java.lang.String'
+                ),
+                timezones = 'timezones' : ARRAY OF (
+                    timezones = 'timezones' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                continents = 'continents' : ARRAY OF (
+                    continents = 'continents' : REGISTER OF (
+                        field_0 = 'field_0' : 'java.lang.String'
+                    )
+                ),
+                flags = 'flags' : REGISTER OF (
+                    png = 'png' : 'java.lang.String',
+                    svg = 'svg' : 'java.lang.String',
+                    alt = 'alt' : 'java.lang.String'
+                ),
+                coatofarms = 'coatOfArms' : REGISTER OF (
+                    png = 'png' : 'java.lang.String',
+                    svg = 'svg' : 'java.lang.String'
+                ),
+                startofweek = 'startOfWeek' : 'java.lang.String',
+                capitalinfo = 'capitalInfo' : REGISTER OF (
+                    latlng = 'latlng' : ARRAY OF (
+                        latlng = 'latlng' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.Double'
+                        )
+                    )
+                ),
+                postalcode = 'postalCode' : REGISTER OF (
+                    format = 'format' : 'java.lang.String',
+                    regex = 'regex' : 'java.lang.String'
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_name_nativename_eng AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_name_nativename AS REGISTER OF (eng:ds_country_code_info_jsonarray_jsonarray_name_nativename_eng);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_name AS REGISTER OF (common:text, official:text, nativename:ds_country_code_info_jsonarray_jsonarray_name_nativename);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_tld_tld AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_tld AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_tld_tld;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_currencies_usd AS REGISTER OF (name:text, symbol:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_currencies AS REGISTER OF (usd:ds_country_code_info_jsonarray_jsonarray_currencies_usd);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_idd_suffixes_suffixes AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_idd_suffixes AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_idd_suffixes_suffixes;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_idd AS REGISTER OF (root:text, suffixes:ds_country_code_info_jsonarray_jsonarray_idd_suffixes);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_capital_capital AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_capital AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_capital_capital;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_altspellings_altspellings AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_altspellings AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_altspellings_altspellings;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_languages AS REGISTER OF (eng:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_ara AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_bre AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_ces AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_cym AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_deu AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_est AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_fin AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_fra AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_hrv AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_hun AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_ita AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_jpn AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_kor AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_nld AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_per AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_pol AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_por AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_rus AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_slk AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_spa AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_srp AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_swe AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_tur AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_urd AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations_zho AS REGISTER OF (official:text, common:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_translations AS REGISTER OF (ara:ds_country_code_info_jsonarray_jsonarray_translations_ara, bre:ds_country_code_info_jsonarray_jsonarray_translations_bre, ces:ds_country_code_info_jsonarray_jsonarray_translations_ces, cym:ds_country_code_info_jsonarray_jsonarray_translations_cym, deu:ds_country_code_info_jsonarray_jsonarray_translations_deu, est:ds_country_code_info_jsonarray_jsonarray_translations_est, fin:ds_country_code_info_jsonarray_jsonarray_translations_fin, fra:ds_country_code_info_jsonarray_jsonarray_translations_fra, hrv:ds_country_code_info_jsonarray_jsonarray_translations_hrv, hun:ds_country_code_info_jsonarray_jsonarray_translations_hun, ita:ds_country_code_info_jsonarray_jsonarray_translations_ita, jpn:ds_country_code_info_jsonarray_jsonarray_translations_jpn, kor:ds_country_code_info_jsonarray_jsonarray_translations_kor, nld:ds_country_code_info_jsonarray_jsonarray_translations_nld, per:ds_country_code_info_jsonarray_jsonarray_translations_per, pol:ds_country_code_info_jsonarray_jsonarray_translations_pol, por:ds_country_code_info_jsonarray_jsonarray_translations_por, rus:ds_country_code_info_jsonarray_jsonarray_translations_rus, slk:ds_country_code_info_jsonarray_jsonarray_translations_slk, spa:ds_country_code_info_jsonarray_jsonarray_translations_spa, srp:ds_country_code_info_jsonarray_jsonarray_translations_srp, swe:ds_country_code_info_jsonarray_jsonarray_translations_swe, tur:ds_country_code_info_jsonarray_jsonarray_translations_tur, urd:ds_country_code_info_jsonarray_jsonarray_translations_urd, zho:ds_country_code_info_jsonarray_jsonarray_translations_zho);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_latlng_latlng AS REGISTER OF (field_0:double);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_latlng AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_latlng_latlng;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_borders_borders AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_borders AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_borders_borders;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_demonyms_eng AS REGISTER OF (f:text, m:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_demonyms_fra AS REGISTER OF (f:text, m:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_demonyms AS REGISTER OF (eng:ds_country_code_info_jsonarray_jsonarray_demonyms_eng, fra:ds_country_code_info_jsonarray_jsonarray_demonyms_fra);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_maps AS REGISTER OF (googlemaps:text, openstreetmaps:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_gini AS REGISTER OF (id_0:double);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_car_signs_signs AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_car_signs AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_car_signs_signs;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_car AS REGISTER OF (signs:ds_country_code_info_jsonarray_jsonarray_car_signs, side:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_timezones_timezones AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_timezones AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_timezones_timezones;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_continents_continents AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_continents AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_continents_continents;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_flags AS REGISTER OF (png:text, svg:text, alt:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_coatofarms AS REGISTER OF (png:text, svg:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_capitalinfo_latlng_latlng AS REGISTER OF (field_0:double);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_capitalinfo_latlng AS ARRAY OF ds_country_code_info_jsonarray_jsonarray_capitalinfo_latlng_latlng;
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_capitalinfo AS REGISTER OF (latlng:ds_country_code_info_jsonarray_jsonarray_capitalinfo_latlng);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray_postalcode AS REGISTER OF (format:text, regex:text);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray_jsonarray AS REGISTER OF (name:ds_country_code_info_jsonarray_jsonarray_name, tld:ds_country_code_info_jsonarray_jsonarray_tld, cca2:text, ccn3:text, cca3:text, cioc:text, independent:text, status:text, unmember:text, currencies:ds_country_code_info_jsonarray_jsonarray_currencies, idd:ds_country_code_info_jsonarray_jsonarray_idd, capital:ds_country_code_info_jsonarray_jsonarray_capital, altspellings:ds_country_code_info_jsonarray_jsonarray_altspellings, region:text, subregion:text, languages:ds_country_code_info_jsonarray_jsonarray_languages, translations:ds_country_code_info_jsonarray_jsonarray_translations, latlng:ds_country_code_info_jsonarray_jsonarray_latlng, landlocked:text, borders:ds_country_code_info_jsonarray_jsonarray_borders, area:double, demonyms:ds_country_code_info_jsonarray_jsonarray_demonyms, flag:text, maps:ds_country_code_info_jsonarray_jsonarray_maps, population:int, gini:ds_country_code_info_jsonarray_jsonarray_gini, fifa:text, car:ds_country_code_info_jsonarray_jsonarray_car, timezones:ds_country_code_info_jsonarray_jsonarray_timezones, continents:ds_country_code_info_jsonarray_jsonarray_continents, flags:ds_country_code_info_jsonarray_jsonarray_flags, coatofarms:ds_country_code_info_jsonarray_jsonarray_coatofarms, startofweek:text, capitalinfo:ds_country_code_info_jsonarray_jsonarray_capitalinfo, postalcode:ds_country_code_info_jsonarray_jsonarray_postalcode);
+
+CREATE OR REPLACE TYPE ds_country_code_info_jsonarray AS ARRAY OF ds_country_code_info_jsonarray_jsonarray;
+
+CREATE OR REPLACE TABLE bv_country_code_info I18N us_est (
+        country_code:text (extern),
+        jsonarray:ds_country_code_info_jsonarray
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_country_code_info(
+        I18N us_est
+        CONSTRAINTS (
+             ADD country_code (=) OBL ONE
+             ADD jsonarray NOS ZERO ()
+             ADD jsonarray NOS ZERO ()
+             ADD jsonarray.name NOS ZERO ()
+             ADD jsonarray.name.common NOS ZERO ()
+             ADD jsonarray.name.official NOS ZERO ()
+             ADD jsonarray.name.nativename NOS ZERO ()
+             ADD jsonarray.name.nativename.eng NOS ZERO ()
+             ADD jsonarray.name.nativename.eng.official NOS ZERO ()
+             ADD jsonarray.name.nativename.eng.common NOS ZERO ()
+             ADD jsonarray.tld NOS ZERO ()
+             ADD jsonarray.tld NOS ZERO ()
+             ADD jsonarray.tld.field_0 NOS ZERO ()
+             ADD jsonarray.cca2 NOS ZERO ()
+             ADD jsonarray.ccn3 NOS ZERO ()
+             ADD jsonarray.cca3 NOS ZERO ()
+             ADD jsonarray.cioc NOS ZERO ()
+             ADD jsonarray.independent NOS ZERO ()
+             ADD jsonarray.status NOS ZERO ()
+             ADD jsonarray.unmember NOS ZERO ()
+             ADD jsonarray.currencies NOS ZERO ()
+             ADD jsonarray.currencies.usd NOS ZERO ()
+             ADD jsonarray.currencies.usd.name NOS ZERO ()
+             ADD jsonarray.currencies.usd.symbol NOS ZERO ()
+             ADD jsonarray.idd NOS ZERO ()
+             ADD jsonarray.idd.root NOS ZERO ()
+             ADD jsonarray.idd.suffixes NOS ZERO ()
+             ADD jsonarray.idd.suffixes NOS ZERO ()
+             ADD jsonarray.idd.suffixes.field_0 NOS ZERO ()
+             ADD jsonarray.capital NOS ZERO ()
+             ADD jsonarray.capital NOS ZERO ()
+             ADD jsonarray.capital.field_0 NOS ZERO ()
+             ADD jsonarray.altspellings NOS ZERO ()
+             ADD jsonarray.altspellings NOS ZERO ()
+             ADD jsonarray.altspellings.field_0 NOS ZERO ()
+             ADD jsonarray.region NOS ZERO ()
+             ADD jsonarray.subregion NOS ZERO ()
+             ADD jsonarray.languages NOS ZERO ()
+             ADD jsonarray.languages.eng NOS ZERO ()
+             ADD jsonarray.translations NOS ZERO ()
+             ADD jsonarray.translations.ara NOS ZERO ()
+             ADD jsonarray.translations.ara.official NOS ZERO ()
+             ADD jsonarray.translations.ara.common NOS ZERO ()
+             ADD jsonarray.translations.bre NOS ZERO ()
+             ADD jsonarray.translations.bre.official NOS ZERO ()
+             ADD jsonarray.translations.bre.common NOS ZERO ()
+             ADD jsonarray.translations.ces NOS ZERO ()
+             ADD jsonarray.translations.ces.official NOS ZERO ()
+             ADD jsonarray.translations.ces.common NOS ZERO ()
+             ADD jsonarray.translations.cym NOS ZERO ()
+             ADD jsonarray.translations.cym.official NOS ZERO ()
+             ADD jsonarray.translations.cym.common NOS ZERO ()
+             ADD jsonarray.translations.deu NOS ZERO ()
+             ADD jsonarray.translations.deu.official NOS ZERO ()
+             ADD jsonarray.translations.deu.common NOS ZERO ()
+             ADD jsonarray.translations.est NOS ZERO ()
+             ADD jsonarray.translations.est.official NOS ZERO ()
+             ADD jsonarray.translations.est.common NOS ZERO ()
+             ADD jsonarray.translations.fin NOS ZERO ()
+             ADD jsonarray.translations.fin.official NOS ZERO ()
+             ADD jsonarray.translations.fin.common NOS ZERO ()
+             ADD jsonarray.translations.fra NOS ZERO ()
+             ADD jsonarray.translations.fra.official NOS ZERO ()
+             ADD jsonarray.translations.fra.common NOS ZERO ()
+             ADD jsonarray.translations.hrv NOS ZERO ()
+             ADD jsonarray.translations.hrv.official NOS ZERO ()
+             ADD jsonarray.translations.hrv.common NOS ZERO ()
+             ADD jsonarray.translations.hun NOS ZERO ()
+             ADD jsonarray.translations.hun.official NOS ZERO ()
+             ADD jsonarray.translations.hun.common NOS ZERO ()
+             ADD jsonarray.translations.ita NOS ZERO ()
+             ADD jsonarray.translations.ita.official NOS ZERO ()
+             ADD jsonarray.translations.ita.common NOS ZERO ()
+             ADD jsonarray.translations.jpn NOS ZERO ()
+             ADD jsonarray.translations.jpn.official NOS ZERO ()
+             ADD jsonarray.translations.jpn.common NOS ZERO ()
+             ADD jsonarray.translations.kor NOS ZERO ()
+             ADD jsonarray.translations.kor.official NOS ZERO ()
+             ADD jsonarray.translations.kor.common NOS ZERO ()
+             ADD jsonarray.translations.nld NOS ZERO ()
+             ADD jsonarray.translations.nld.official NOS ZERO ()
+             ADD jsonarray.translations.nld.common NOS ZERO ()
+             ADD jsonarray.translations.per NOS ZERO ()
+             ADD jsonarray.translations.per.official NOS ZERO ()
+             ADD jsonarray.translations.per.common NOS ZERO ()
+             ADD jsonarray.translations.pol NOS ZERO ()
+             ADD jsonarray.translations.pol.official NOS ZERO ()
+             ADD jsonarray.translations.pol.common NOS ZERO ()
+             ADD jsonarray.translations.por NOS ZERO ()
+             ADD jsonarray.translations.por.official NOS ZERO ()
+             ADD jsonarray.translations.por.common NOS ZERO ()
+             ADD jsonarray.translations.rus NOS ZERO ()
+             ADD jsonarray.translations.rus.official NOS ZERO ()
+             ADD jsonarray.translations.rus.common NOS ZERO ()
+             ADD jsonarray.translations.slk NOS ZERO ()
+             ADD jsonarray.translations.slk.official NOS ZERO ()
+             ADD jsonarray.translations.slk.common NOS ZERO ()
+             ADD jsonarray.translations.spa NOS ZERO ()
+             ADD jsonarray.translations.spa.official NOS ZERO ()
+             ADD jsonarray.translations.spa.common NOS ZERO ()
+             ADD jsonarray.translations.srp NOS ZERO ()
+             ADD jsonarray.translations.srp.official NOS ZERO ()
+             ADD jsonarray.translations.srp.common NOS ZERO ()
+             ADD jsonarray.translations.swe NOS ZERO ()
+             ADD jsonarray.translations.swe.official NOS ZERO ()
+             ADD jsonarray.translations.swe.common NOS ZERO ()
+             ADD jsonarray.translations.tur NOS ZERO ()
+             ADD jsonarray.translations.tur.official NOS ZERO ()
+             ADD jsonarray.translations.tur.common NOS ZERO ()
+             ADD jsonarray.translations.urd NOS ZERO ()
+             ADD jsonarray.translations.urd.official NOS ZERO ()
+             ADD jsonarray.translations.urd.common NOS ZERO ()
+             ADD jsonarray.translations.zho NOS ZERO ()
+             ADD jsonarray.translations.zho.official NOS ZERO ()
+             ADD jsonarray.translations.zho.common NOS ZERO ()
+             ADD jsonarray.latlng NOS ZERO ()
+             ADD jsonarray.latlng NOS ZERO ()
+             ADD jsonarray.latlng.field_0 NOS ZERO ()
+             ADD jsonarray.landlocked NOS ZERO ()
+             ADD jsonarray.borders NOS ZERO ()
+             ADD jsonarray.borders NOS ZERO ()
+             ADD jsonarray.borders.field_0 NOS ZERO ()
+             ADD jsonarray.area NOS ZERO ()
+             ADD jsonarray.demonyms NOS ZERO ()
+             ADD jsonarray.demonyms.eng NOS ZERO ()
+             ADD jsonarray.demonyms.eng.f NOS ZERO ()
+             ADD jsonarray.demonyms.eng.m NOS ZERO ()
+             ADD jsonarray.demonyms.fra NOS ZERO ()
+             ADD jsonarray.demonyms.fra.f NOS ZERO ()
+             ADD jsonarray.demonyms.fra.m NOS ZERO ()
+             ADD jsonarray.flag NOS ZERO ()
+             ADD jsonarray.maps NOS ZERO ()
+             ADD jsonarray.maps.googlemaps NOS ZERO ()
+             ADD jsonarray.maps.openstreetmaps NOS ZERO ()
+             ADD jsonarray.population NOS ZERO ()
+             ADD jsonarray.gini NOS ZERO ()
+             ADD jsonarray.gini.id_0 NOS ZERO ()
+             ADD jsonarray.fifa NOS ZERO ()
+             ADD jsonarray.car NOS ZERO ()
+             ADD jsonarray.car.signs NOS ZERO ()
+             ADD jsonarray.car.signs NOS ZERO ()
+             ADD jsonarray.car.signs.field_0 NOS ZERO ()
+             ADD jsonarray.car.side NOS ZERO ()
+             ADD jsonarray.timezones NOS ZERO ()
+             ADD jsonarray.timezones NOS ZERO ()
+             ADD jsonarray.timezones.field_0 NOS ZERO ()
+             ADD jsonarray.continents NOS ZERO ()
+             ADD jsonarray.continents NOS ZERO ()
+             ADD jsonarray.continents.field_0 NOS ZERO ()
+             ADD jsonarray.flags NOS ZERO ()
+             ADD jsonarray.flags.png NOS ZERO ()
+             ADD jsonarray.flags.svg NOS ZERO ()
+             ADD jsonarray.flags.alt NOS ZERO ()
+             ADD jsonarray.coatofarms NOS ZERO ()
+             ADD jsonarray.coatofarms.png NOS ZERO ()
+             ADD jsonarray.coatofarms.svg NOS ZERO ()
+             ADD jsonarray.startofweek NOS ZERO ()
+             ADD jsonarray.capitalinfo NOS ZERO ()
+             ADD jsonarray.capitalinfo.latlng NOS ZERO ()
+             ADD jsonarray.capitalinfo.latlng NOS ZERO ()
+             ADD jsonarray.capitalinfo.latlng.field_0 NOS ZERO ()
+             ADD jsonarray.postalcode NOS ZERO ()
+             ADD jsonarray.postalcode.format NOS ZERO ()
+             ADD jsonarray.postalcode.regex NOS ZERO ()
+        )
+        OUTPUTLIST (jsonarray
+        )
+        WRAPPER (json ds_country_code_info)
+    );
+

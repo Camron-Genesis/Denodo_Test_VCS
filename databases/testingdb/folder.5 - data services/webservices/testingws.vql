@@ -1,0 +1,91 @@
+﻿CREATE OR REPLACE REST WEBSERVICE testingws
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = HTML
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
+    RESOURCES (
+        VIEW iv_final_view FIELDS (
+            country_code : 'text', 
+            country_name : 'text', 
+            currency_name : 'text', 
+            lastname_0 : 'text', 
+            firstname_0 : 'text', 
+            jobtitle_0 : 'text', 
+            personstreet_0 : 'text', 
+            personcity_0 : 'text', 
+            personstate_0 : 'text', 
+            personzip_0 : 'text', 
+            personcountry : 'text', 
+            name : 'text', 
+            predicted_country : 'text', 
+            probability : 'text', 
+            country : 'ds_nationality_predicter_country', 
+            state_name : 'text', 
+            population : 'text', 
+            state : 'text', 
+            personstreet : 'text', 
+            postalcode : 'text', 
+            latitude : 'double', 
+            longitude : 'double', 
+            is_valid : 'boolean', 
+            location_0 : 'text', 
+            temp_c : 'double', 
+            temp_f : 'double', 
+            last_updated : 'text', 
+            text : 'text', 
+            precip_in : 'double'
+        ),
+        VIEW iv_nationality_predicter FIELDS (
+            name : 'text' OBL, 
+            predicted_country : 'text', 
+            probability : 'text', 
+            country : 'ds_nationality_predicter_country'
+        ),
+        VIEW iv_country_code_info FIELDS (
+            country_code : 'text' OBL, 
+            country_name : 'text', 
+            currency_name : 'text'
+        ),
+        VIEW iv_weather_data FIELDS (
+            location_0 : 'text' OBL, 
+            temp_c : 'double', 
+            temp_f : 'double', 
+            last_updated : 'text', 
+            text : 'text', 
+            precip_in : 'double'
+        ),
+        VIEW iv_home_addresses FIELDS (
+            lastname_0 : 'text', 
+            firstname_0 : 'text', 
+            jobtitle_0 : 'text', 
+            personstreet_0 : 'text', 
+            personcity_0 : 'text', 
+            personstate_0 : 'text', 
+            personzip_0 : 'text', 
+            country : 'text'
+        ),
+        VIEW iv_state_population FIELDS (
+            state_name : 'text', 
+            population : 'text', 
+            state : 'text'
+        ),
+        VIEW iv_validation_address FIELDS (
+            personstreet : 'text' OBL, 
+            actualpostalcode : 'text' OBL, 
+            latitude : 'double', 
+            longitude : 'double', 
+            is_valid : 'boolean'
+        )
+    )
+    ASSOCIATIONS ( iv_country_code_info_iv_nationality_predicter, iv_validation_address_iv_home_addresses, iv_state_population_iv_home_addresses, iv_nationality_predicter_iv_home_addresses, iv_weather_data_iv_home_addresses )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false
+        PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) 
+    FOLDER = '/5 - data services';
+

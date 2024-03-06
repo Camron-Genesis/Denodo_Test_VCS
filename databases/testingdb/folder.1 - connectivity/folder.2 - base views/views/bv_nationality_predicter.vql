@@ -1,0 +1,45 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON ds_nationality_predicter
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_nationality_predicter
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.json.ds_nationality_predicter.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        count = 'count' : 'java.lang.Integer',
+        name = 'name' : 'java.lang.String' (OBL) (DEFAULTVALUE='camron'),
+        country = 'country' : ARRAY OF (
+            country = 'country' : REGISTER OF (
+                country_id = 'country_id' : 'java.lang.String',
+                probability = 'probability' : 'java.lang.Double'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_nationality_predicter_country_country AS REGISTER OF (country_id:text, probability:double);
+
+CREATE OR REPLACE TYPE ds_nationality_predicter_country AS ARRAY OF ds_nationality_predicter_country_country;
+
+CREATE OR REPLACE TABLE bv_nationality_predicter I18N us_est (
+        count:int,
+        name:text,
+        country:ds_nationality_predicter_country
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_nationality_predicter(
+        I18N us_est
+        CONSTRAINTS (
+             ADD count NOS ZERO ()
+             ADD name (=) OBL ONE
+             ADD country NOS ZERO ()
+             ADD country NOS ZERO ()
+             ADD country.country_id NOS ZERO ()
+             ADD country.probability NOS ZERO ()
+        )
+        OUTPUTLIST (count, country, name
+        )
+        WRAPPER (json ds_nationality_predicter)
+    );
+

@@ -1,0 +1,9 @@
+﻿CREATE OR REPLACE ASSOCIATION iv_weather_data_iv_home_addresses REFERENTIAL CONSTRAINT 
+FOLDER = '/7 - associations'
+    ENDPOINT iv_home_addresses iv_weather_data (0,1)
+    ENDPOINT iv_weather_data iv_home_addresses PRINCIPAL (0,1)
+    ADD MAPPING location_0=personzip_0;
+
+ALTER ASSOCIATION iv_weather_data_iv_home_addresses
+ LAYOUT (iv_weather_data = [189, 249, 200, 145], iv_home_addresses = [488, 244, 200, 185]);
+

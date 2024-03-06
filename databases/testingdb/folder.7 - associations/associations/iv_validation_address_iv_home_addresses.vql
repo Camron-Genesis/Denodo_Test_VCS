@@ -1,0 +1,10 @@
+﻿CREATE OR REPLACE ASSOCIATION iv_validation_address_iv_home_addresses REFERENTIAL CONSTRAINT 
+FOLDER = '/7 - associations'
+    ENDPOINT iv_home_addresses iv_validation_address (0,*)
+    ENDPOINT iv_validation_address iv_home_addresses PRINCIPAL (0,1)
+    ADD MAPPING personstreet=personstreet_0
+    ADD MAPPING actualpostalcode=personzip_0;
+
+ALTER ASSOCIATION iv_validation_address_iv_home_addresses
+ LAYOUT (iv_validation_address = [510, 330, 200, 125], iv_home_addresses = [154, 317, 200, 185]);
+
