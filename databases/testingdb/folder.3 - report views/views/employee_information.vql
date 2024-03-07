@@ -1,0 +1,41 @@
+﻿CREATE OR REPLACE TYPE ds_nationality_predicter_country_country AS REGISTER OF (country_id:text, probability:double);
+
+CREATE OR REPLACE TYPE ds_nationality_predicter_country AS ARRAY OF ds_nationality_predicter_country_country;
+
+CREATE OR REPLACE INTERFACE VIEW employee_information (
+        country_code:text,
+        country_name:text,
+        currency_name:text,
+        lastname_0:text,
+        firstname_0:text,
+        jobtitle_0:text,
+        personstreet_0:text,
+        personcity_0:text,
+        personstate_0:text,
+        personzip_0:text,
+        personcountry:text,
+        name:text,
+        predicted_country:text,
+        probability:text,
+        country:ds_nationality_predicter_country,
+        state_name:text,
+        population:text,
+        state:text,
+        personstreet:text,
+        postalcode:text,
+        latitude:double,
+        longitude:double,
+        is_valid:boolean,
+        location_0:text,
+        temp_c:double,
+        temp_f:double,
+        last_updated:text,
+        text:text,
+        precip_in:double
+    )
+    SET IMPLEMENTATION iv_final_view
+    FOLDER = '/3 - report views';
+
+ALTER VIEW employee_information
+ LAYOUT (iv_final_view = [580, 20, 350, 375]);
+
