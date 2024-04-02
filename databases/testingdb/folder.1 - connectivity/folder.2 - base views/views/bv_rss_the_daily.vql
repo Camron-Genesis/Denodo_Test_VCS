@@ -1,9 +1,9 @@
 ﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
 CREATE OR REPLACE WRAPPER XML bv_rss_the_daily
-    FOLDER = '/1 - connectivity/1 - data sources'
+    FOLDER = '/1 - connectivity/2 - base views'
     DATASOURCENAME=ds_rss_the_daily
     TUPLEROOT '/rss/channel/item'
-    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.1 - data sources.views.xml.bv_rss_the_daily.ROUTE.HTTP.URL}'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.xml.bv_rss_the_daily.ROUTE.HTTP.URL}'
     OUTPUTSCHEMA (rss = 'rss' : REGISTER OF (
         version = '#version' : 'java.lang.Float',
         atomlink_0 = 'rss.channel.atom:link' : ARRAY OF (
@@ -138,10 +138,11 @@ CREATE OR REPLACE TABLE bv_rss_the_daily I18N us_est (
         itunesepisodetype_0:text,
         itunesepisode_0:int
     )
-    FOLDER = '/1 - connectivity/1 - data sources'
-    CACHE FULL
+    FOLDER = '/1 - connectivity/2 - base views'
+    PRIMARY KEY ( 'pubdate' )
+    CACHE FULL INCREMENTAL 'pubdate = ''@LAST_REFRESH_DATE''' NO_DELEGATE_CONDITIONS_TO_SOURCE 
     BATCHSIZEINCACHE DEFAULT
-    TIMETOLIVEINCACHE 86400
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_rss_the_daily(
         I18N us_est
         CONSTRAINTS (

@@ -49,8 +49,9 @@ CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
         employees:text
     )
     FOLDER = '/1 - connectivity/2 - base views'
-    CACHE OFF
-    TIMETOLIVEINCACHE DEFAULT
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD ds_sample_addresses(
         I18N us_est
         CONSTRAINTS (

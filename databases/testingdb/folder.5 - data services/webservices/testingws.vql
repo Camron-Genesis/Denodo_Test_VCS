@@ -30,7 +30,7 @@
             population : 'text', 
             state : 'text', 
             personstreet : 'text', 
-            postalcode : 'text', 
+            postalcodevalidation : 'text', 
             latitude : 'double', 
             longitude : 'double', 
             is_valid : 'boolean', 
@@ -39,7 +39,9 @@
             temp_f : 'double', 
             last_updated : 'text', 
             text : 'text', 
-            precip_in : 'double'
+            precip_in : 'double', 
+            countryaddress : 'text' UNESCAPED, 
+            actualpostalcode : 'text' UNESCAPED
         ),
         VIEW iv_nationality_predicter FIELDS (
             name : 'text' OBL, 

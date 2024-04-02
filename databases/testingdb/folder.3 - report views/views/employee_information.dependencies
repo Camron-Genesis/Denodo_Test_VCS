@@ -1,3 +1,9 @@
 ﻿/databases/testingdb/folder.3 - report views/3 - report views.vql
 /databases/testingdb/folder.2 - integration/2 - integration.vql
+/databases/testingdb/folder.2 - integration/views/iv_home_addresses.vql
+/databases/testingdb/folder.2 - integration/views/iv_country_code_info.vql
+/databases/testingdb/folder.2 - integration/views/iv_nationality_predicter.vql
+/databases/testingdb/folder.2 - integration/views/iv_state_population.vql
+/databases/testingdb/folder.2 - integration/views/iv_validation_address.vql
+/databases/testingdb/folder.2 - integration/views/iv_weather_data.vql
 /databases/testingdb/folder.2 - integration/views/iv_final_view.vql

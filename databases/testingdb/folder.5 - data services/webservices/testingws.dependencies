@@ -1,24 +1,9 @@
 ﻿/databases/testingdb/folder.5 - data services/5 - data services.vql
 /databases/testingdb/folder.2 - integration/2 - integration.vql
-/databases/testingdb/folder.1 - connectivity/1 - connectivity.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/2 - base views.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/1 - data sources.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/df/ds_sample_addresses.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_sample_addresses.vql
 /databases/testingdb/folder.2 - integration/views/iv_home_addresses.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_country_code_info.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_country_code_info.vql
 /databases/testingdb/folder.2 - integration/views/iv_country_code_info.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_nationality_predicter.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_nationality_predicter.vql
 /databases/testingdb/folder.2 - integration/views/iv_nationality_predicter.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_county_state.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_state_population.vql
 /databases/testingdb/folder.2 - integration/views/iv_state_population.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_validation_address.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_validation_address.vql
 /databases/testingdb/folder.2 - integration/views/iv_validation_address.vql
-/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/json/ds_weather_data.vql
-/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_weather_data.vql
 /databases/testingdb/folder.2 - integration/views/iv_weather_data.vql
 /databases/testingdb/folder.2 - integration/views/iv_final_view.vql

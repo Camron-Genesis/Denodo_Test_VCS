@@ -33,7 +33,37 @@ CREATE OR REPLACE INTERFACE VIEW employee_information (
         text:text,
         precip_in:double
     )
-    SET IMPLEMENTATION iv_final_view
+    SET IMPLEMENTATION iv_final_view(
+        country_code = country_code,
+        country_name = country_name,
+        currency_name = currency_name,
+        lastname_0 = lastname_0,
+        firstname_0 = firstname_0,
+        jobtitle_0 = jobtitle_0,
+        personstreet_0 = personstreet_0,
+        personcity_0 = personcity_0,
+        personstate_0 = personstate_0,
+        personzip_0 = personzip_0,
+        personcountry = personcountry,
+        name = name,
+        predicted_country = predicted_country,
+        probability = probability,
+        country = country,
+        state_name = state_name,
+        population = population,
+        state = state,
+        personstreet = personstreet,
+        postalcode = postalcodevalidation,
+        latitude = latitude,
+        longitude = longitude,
+        is_valid = is_valid,
+        location_0 = location_0,
+        temp_c = temp_c,
+        temp_f = temp_f,
+        last_updated = last_updated,
+        text = text,
+        precip_in = precip_in    
+)
     FOLDER = '/3 - report views';
 
 ALTER VIEW employee_information
