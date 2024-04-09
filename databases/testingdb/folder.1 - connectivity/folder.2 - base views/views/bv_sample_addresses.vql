@@ -80,5 +80,6 @@ CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
         OUTPUTLIST (companycity_0, companycountry_0, companydomainname_0, companyname_0, companyphonenumber_0, companystate_0, companystreetaddress_0, companyzippostalcode_0, country, directphonenumber_0, emailaddress_0, employees, firstname_0, industrylabel_0, jobtitle_0, lastname_0, personcity_0, personstate_0, personstreet_0, personzip_0, revenuein000s_0
         )
         WRAPPER (df ds_sample_addresses)
-    );
+    )
+    ATSOURCE_THROUGH_VDP_ONLY;
 

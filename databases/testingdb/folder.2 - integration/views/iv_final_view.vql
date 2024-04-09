@@ -3,3 +3,7 @@
 ALTER VIEW iv_final_view
  LAYOUT (iv_home_addresses = [20, 20, 200, 185], iv_country_code_info = [20, 235, 200, 85], iv_nationality_predicter = [20, 350, 200, 105], iv_state_population = [20, 485, 200, 85], iv_validation_address = [20, 600, 200, 145], iv_weather_data = [20, 775, 200, 145]);
 
+ALTER VIEW iv_final_view
+ CACHE FULL
+     BATCHSIZEINCACHE DEFAULT TIMETOLIVEINCACHE DEFAULT;
+
