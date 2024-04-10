@@ -1,4 +1,2 @@
 ﻿UNDEPLOY IF EXISTS WEBSERVICE ws_all_orders;
 
-DEPLOY WEBSERVICE ws_all_orders;
-

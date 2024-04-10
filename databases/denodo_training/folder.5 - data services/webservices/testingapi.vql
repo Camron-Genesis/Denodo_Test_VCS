@@ -1,0 +1,286 @@
+﻿CREATE OR REPLACE REST WEBSERVICE testingapi
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = HTML
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
+    RESOURCES (
+        VIEW iv_current_customer FIELDS (
+            id : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp'
+        ),
+        VIEW iv_customer FIELDS (
+            customer_id : 'decimal', 
+            customer_name : 'text', 
+            customer_address : 'text', 
+            phone_number : 'text', 
+            customer_code : 'text', 
+            job_title : 'text', 
+            other_details : 'text'
+        ),
+        VIEW iv_customer_calls FIELDS (
+            id : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp', 
+            call_id : 'decimal', 
+            location_id : 'decimal', 
+            problem_code : 'decimal', 
+            status_code : 'decimal', 
+            date_ticket_issued : 'timestamp', 
+            date_call_received : 'timestamp', 
+            other_details : 'text', 
+            caller_phone : 'text', 
+            case_id : 'decimal', 
+            agent_id : 'decimal', 
+            customer_code : 'text'
+        ),
+        VIEW iv_customer_address FIELDS (
+            id : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            registered_date : 'timestamp', 
+            address : '_register_main_address_main_postcode_main_country'
+        ),
+        VIEW iv_customer_china FIELDS (
+            id : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp'
+        ),
+        VIEW iv_customer_info FIELDS (
+            id : 'decimal', 
+            first_name : 'text', 
+            phone : 'text', 
+            customer_code : 'text', 
+            name_length : 'int'
+        ),
+        VIEW iv_customer_interactions FIELDS (
+            customer_code : 'text', 
+            interactions : '_array_register_agent_id_interaction_date_case_id_interaction_phone_interaction_ip', 
+            ticket_raised : 'timestamp'
+        ),
+        VIEW iv_customer_interactions_2 FIELDS (
+            customer_code : 'text', 
+            interactions : '_array_register_agent_id_interaction_date_case_id_interaction_phone_interaction_ip'
+        ),
+        VIEW iv_customer_orders FIELDS (
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            order_id : 'decimal', 
+            productid : 'int', 
+            productname : 'text', 
+            productprice : 'float', 
+            category : 'getallproductdetails_category', 
+            characteristics : 'getallproductdetails_characteristics', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp'
+        ),
+        VIEW iv_customer_orders_2 FIELDS (
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            order_id : 'decimal', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp', 
+            productid : 'int', 
+            productname : 'text', 
+            productprice : 'float', 
+            category : 'getallproductdetails_category', 
+            characteristics : 'getallproductdetails_characteristics'
+        ),
+        VIEW iv_customer_orders_report FIELDS (
+            customer_code : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            status : 'text', 
+            date_placed : 'text', 
+            date_delivered : 'text', 
+            date_closed : 'text', 
+            order_id : 'decimal', 
+            productid : 'int', 
+            productname : 'text'
+        ),
+        VIEW iv_employee_sales FIELDS (
+            employeeid : 'text', 
+            total_sales : 'long', 
+            total_price : 'int', 
+            start_date : 'localdate', 
+            end_date : 'localdate'
+        ),
+        VIEW iv_employee_sales_2 FIELDS (
+            employeeid : 'text', 
+            total_sales : 'long', 
+            total_price : 'decimal', 
+            start_date : 'localdate', 
+            end_date : 'localdate'
+        ),
+        VIEW iv_employee_seniority FIELDS (
+            employee_id : 'int', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone_number : 'text', 
+            hire_date : 'timestamp', 
+            job_id : 'text', 
+            salary : 'decimal', 
+            commission_pct : 'decimal', 
+            manager_id : 'int', 
+            department_id : 'int', 
+            seniority : 'decimal'
+        ),
+        VIEW iv_orders FIELDS (
+            id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            order_id : 'decimal', 
+            product_id : 'decimal'
+        ),
+        VIEW iv_orders_2 FIELDS (
+            id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            order_id : 'decimal', 
+            product_id : 'decimal', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp'
+        ),
+        VIEW iv_order_status FIELDS (
+            status : 'text', 
+            count : 'long', 
+            hour : 'long', 
+            info : '_array_register_date_placed_date_delivered_customer_code', 
+            start_date : 'time' OBL, 
+            end_date : 'time' OBL
+        ),
+        VIEW iv_orders_by_customer FIELDS (
+            customer_code : 'text', 
+            total_orders : 'long'
+        ),
+        VIEW iv_orders_by_date FIELDS (
+            id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            start_date_placed : 'timestamp' OBL, 
+            end_date_placed : 'timestamp' OBL
+        ),
+        VIEW iv_orders_current FIELDS (
+            id : 'decimal', 
+            order_id : 'decimal', 
+            product_id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            time_placed : 'time', 
+            start_date_placed : 'timestamp' OBL, 
+            end_date_placed : 'timestamp' OBL
+        ),
+        VIEW iv_orders_customer_detail FIELDS (
+            customerid : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp', 
+            id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            order_id : 'decimal', 
+            product_id : 'decimal'
+        ),
+        VIEW iv_orders_customer_detail_2 FIELDS (
+            id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            order_id : 'decimal', 
+            product_id : 'decimal', 
+            date_placed : 'timestamp', 
+            date_delivered : 'timestamp', 
+            date_closed : 'timestamp', 
+            customer_id : 'decimal', 
+            customer_code_internal : 'text', 
+            first_name : 'text', 
+            last_name : 'text', 
+            email : 'text', 
+            phone : 'text', 
+            main_address : 'text', 
+            main_postcode : 'text', 
+            main_country : 'text', 
+            registered_date : 'timestamp'
+        ),
+        VIEW iv_orders_historical FIELDS (
+            id : 'decimal', 
+            order_id : 'decimal', 
+            product_id : 'decimal', 
+            customer_code : 'text', 
+            status : 'text', 
+            dateplaced : 'timestamp', 
+            datedelivered : 'timestamp', 
+            dateclosed : 'timestamp'
+        )
+    )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false
+        PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) 
+    FOLDER = '/5 - data services';
+
