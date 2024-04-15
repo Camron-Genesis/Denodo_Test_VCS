@@ -16,6 +16,6 @@ ALTER DATABASE denodo_training
     MAINTENANCE OFF
     MAINTAINERPERIOD 21600
     TIMETOLIVE 3600
-    DATASOURCE ds_web_orders DATABASE denodo_training
+    DATASOURCE cache_db DATABASE testingdb
   );
 
