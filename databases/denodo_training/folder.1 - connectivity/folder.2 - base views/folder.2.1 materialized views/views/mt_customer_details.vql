@@ -1,0 +1,7 @@
+﻿CREATE OR REPLACE MATERIALIZED TABLE mt_customer_details (
+        customer_id:decimal (sourcetypeid = '3', sourcetyperadix = '10'),
+        customer_name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '21'),
+        customer_address:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '27')
+    )
+    FOLDER = '/1 - connectivity/2 - base views/2.1 materialized views';
+

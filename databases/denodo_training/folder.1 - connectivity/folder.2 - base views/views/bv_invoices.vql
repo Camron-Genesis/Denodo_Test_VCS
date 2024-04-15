@@ -15,7 +15,8 @@
         amount:int (sourcetypeid = '4')
     )
     FOLDER = '/1 - connectivity/2 - base views'
-    CACHE OFF
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_invoices(
         I18N us_pst
@@ -38,5 +39,6 @@
         OUTPUTLIST (address, amount, country, date_closed, date_delivered, date_invoice, date_placed, email, first_name, invoice_id, last_name, order_id, phone, postal_code
         )
         WRAPPER (custom bv_invoices)
-    );
+    )
+    ATSOURCE_THROUGH_VDP_ONLY;
 

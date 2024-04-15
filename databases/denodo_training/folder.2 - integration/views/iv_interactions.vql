@@ -3,3 +3,7 @@
 ALTER VIEW iv_interactions
  LAYOUT (bv_support_get_all_service_request = [20, 20, 200, 225], bv_cc_service_call = [250, 20, 200, 225]);
 
+ALTER VIEW iv_interactions
+ CACHE FULL
+     BATCHSIZEINCACHE DEFAULT TIMETOLIVEINCACHE DEFAULT;
+
