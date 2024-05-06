@@ -17,6 +17,7 @@ CREATE OR REPLACE TABLE bv_cc_agent I18N us_est (
     )
     FOLDER = '/1 - connectivity/2 - base views/call_center'
     CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE DEFAULT
     ADD SEARCHMETHOD bv_cc_agent(
         I18N us_est
@@ -28,5 +29,7 @@ CREATE OR REPLACE TABLE bv_cc_agent I18N us_est (
         OUTPUTLIST (agent_code, agent_id, agent_name
         )
         WRAPPER (jdbc bv_cc_agent)
-    );
+    )
+    DECLARE VIEW CLUSTER INDEX agent_id_index ON (agent_id)
+    SMART_ONLY;
 
