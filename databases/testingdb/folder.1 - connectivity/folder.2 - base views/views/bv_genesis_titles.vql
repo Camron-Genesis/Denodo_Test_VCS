@@ -1,0 +1,87 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC genesis_titles
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=azure_connection
+    CATALOGNAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.genesis_titles.CATALOGNAME}' 
+    SCHEMANAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.genesis_titles.SCHEMANAME}' 
+    RELATIONNAME='genesis_titles' 
+    OUTPUTSCHEMA (
+        lastname_0 = 'Last name' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        firstname_0 = 'First name' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        jobtitle_0 = 'Job title' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        directphonenumber_0 = 'Direct Phone Number' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        emailaddress_0 = 'Email address' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        personstreet_0 = 'Person Street' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        personcity_0 = 'Person City' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        personstate_0 = 'Person State' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        personzip_0 = 'Person Zip' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        country = 'Country' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        companyname_0 = 'Company name' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companydomainname_0 = 'Company domain name' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companyphonenumber_0 = 'Company phone number' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companystreetaddress_0 = 'Company Street address' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companycity_0 = 'Company City' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companystate_0 = 'Company State' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companyzippostalcode_0 = 'Company ZIP Postal code' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        companycountry_0 = 'Company Country' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        industrylabel_0 = 'Industry label' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        revenuein000s_0 = 'Revenue (in 000s)' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
+        employees = 'Employees' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_genesis_titles I18N us_est (
+        lastname_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        firstname_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        jobtitle_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        directphonenumber_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        emailaddress_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        personstreet_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        personcity_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        personstate_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        personzip_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        country:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companyname_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companydomainname_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companyphonenumber_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companystreetaddress_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companycity_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companystate_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companyzippostalcode_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        companycountry_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        industrylabel_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        revenuein000s_0:text (sourcetypeid = '12', sourcetypesize = '150'),
+        employees:text (sourcetypeid = '12', sourcetypesize = '150')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD genesis_titles(
+        I18N us_est
+        CONSTRAINTS (
+             ADD lastname_0 (any) OPT ANY
+             ADD firstname_0 (any) OPT ANY
+             ADD jobtitle_0 (any) OPT ANY
+             ADD directphonenumber_0 (any) OPT ANY
+             ADD emailaddress_0 (any) OPT ANY
+             ADD personstreet_0 (any) OPT ANY
+             ADD personcity_0 (any) OPT ANY
+             ADD personstate_0 (any) OPT ANY
+             ADD personzip_0 (any) OPT ANY
+             ADD country (any) OPT ANY
+             ADD companyname_0 (any) OPT ANY
+             ADD companydomainname_0 (any) OPT ANY
+             ADD companyphonenumber_0 (any) OPT ANY
+             ADD companystreetaddress_0 (any) OPT ANY
+             ADD companycity_0 (any) OPT ANY
+             ADD companystate_0 (any) OPT ANY
+             ADD companyzippostalcode_0 (any) OPT ANY
+             ADD companycountry_0 (any) OPT ANY
+             ADD industrylabel_0 (any) OPT ANY
+             ADD revenuein000s_0 (any) OPT ANY
+             ADD employees (any) OPT ANY
+        )
+        OUTPUTLIST (companycity_0, companycountry_0, companydomainname_0, companyname_0, companyphonenumber_0, companystate_0, companystreetaddress_0, companyzippostalcode_0, country, directphonenumber_0, emailaddress_0, employees, firstname_0, industrylabel_0, jobtitle_0, lastname_0, personcity_0, personstate_0, personstreet_0, personzip_0, revenuein000s_0
+        )
+        WRAPPER (jdbc genesis_titles)
+    );
+

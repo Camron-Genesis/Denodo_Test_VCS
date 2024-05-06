@@ -49,6 +49,7 @@ CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
         employees:text
     )
     FOLDER = '/1 - connectivity/2 - base views'
+    PRIMARY KEY ( 'emailaddress_0' )
     CACHE FULL
     BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE NOEXPIRE
@@ -81,7 +82,7 @@ CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
         )
         WRAPPER (df ds_sample_addresses)
     )
-    DECLARE VIEW CLUSTER INDEX last_name_index ON (lastname_0)
+    DECLARE VIEW CLUSTER INDEX last_name_index PRIMARY  UNIQUE  ON (emailaddress_0)
     DECLARE CACHE INDEX last_name_ndex ON (lastname_0)
     ATCACHE_THROUGH_VDP_ONLY;
 
