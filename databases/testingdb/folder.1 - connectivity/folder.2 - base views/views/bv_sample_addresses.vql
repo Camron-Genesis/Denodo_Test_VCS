@@ -81,5 +81,7 @@ CREATE OR REPLACE TABLE bv_sample_addresses I18N us_est (
         )
         WRAPPER (df ds_sample_addresses)
     )
-    ATSOURCE_THROUGH_VDP_ONLY;
+    DECLARE VIEW CLUSTER INDEX last_name_index ON (lastname_0)
+    DECLARE CACHE INDEX last_name_ndex ON (lastname_0)
+    ATCACHE_THROUGH_VDP_ONLY;
 
