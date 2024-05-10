@@ -1,0 +1,9 @@
+﻿/databases/testingdb/folder.6 - summaries/6 - summaries.vql
+/databases/testingdb/folder.2 - integration/2 - integration.vql
+/databases/testingdb/folder.1 - connectivity/1 - connectivity.vql
+/databases/testingdb/folder.1 - connectivity/folder.2 - base views/2 - base views.vql
+/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/1 - data sources.vql
+/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/jdbc/azure_connection.vql
+/databases/testingdb/folder.1 - connectivity/folder.2 - base views/views/bv_genesis_titles.vql
+/databases/testingdb/folder.2 - integration/views/iv_genesis_titles.vql
+/databases/testingdb/folder.1 - connectivity/folder.1 - data sources/datasources/jdbc/ds_mysql.vql

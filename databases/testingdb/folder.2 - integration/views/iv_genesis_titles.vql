@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW iv_genesis_titles FOLDER = '/2 - integration' AS SELECT industrylabel_0 AS industrylabel_0, personstate_0 AS personstate_0, nest(companycity_0, companyname_0, firstname_0, lastname_0) AS companies FROM bv_genesis_titles GROUP BY personstate_0, industrylabel_0 WITH CASCADED CHECK OPTION;
+

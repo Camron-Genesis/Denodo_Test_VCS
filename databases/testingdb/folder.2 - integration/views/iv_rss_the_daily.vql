@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_rss_the_daily FOLDER = '/2 - integration' AS SELECT bv_rss_the_daily.title AS title, bv_rss_the_daily.description AS description, to_timestamp('dd MMM yyyy HH:mm:ss', substring(pubdate, 5, (len(bv_rss_the_daily.pubdate)-6))) AS pubdate FROM bv_rss_the_daily;
+
+ALTER VIEW iv_rss_the_daily
+ LAYOUT (bv_rss_the_daily = [20, 20, 200, 105]);
+

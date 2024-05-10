@@ -140,7 +140,7 @@ CREATE OR REPLACE TABLE bv_rss_the_daily I18N us_est (
     )
     FOLDER = '/1 - connectivity/2 - base views'
     PRIMARY KEY ( 'pubdate' )
-    CACHE FULL INCREMENTAL 'pubdate = ''@LAST_REFRESH_DATE''' NO_DELEGATE_CONDITIONS_TO_SOURCE 
+    CACHE FULL INCREMENTAL 'to_timestamp(''dd MMM yyyy HH:mm:ss'', substring(pubdate, 5, (len(pubdate)-6))) > cast(''@LAST_REFRESH_DATE'' AS TIMESTAMP)' NO_DELEGATE_CONDITIONS_TO_SOURCE 
     BATCHSIZEINCACHE DEFAULT
     TIMETOLIVEINCACHE NOEXPIRE
     ADD SEARCHMETHOD bv_rss_the_daily(
@@ -210,5 +210,6 @@ CREATE OR REPLACE TABLE bv_rss_the_daily I18N us_est (
         OUTPUTLIST (atomlink_0, author, contentencoded_0, copyright, description, description_0, enclosure, generator, guid, image, itunesauthor_0, itunesauthor_1, itunescategory_0, itunesduration_0, itunesepisode_0, itunesepisodetype_0, itunesexplicit_0, itunesexplicit_1, itunesimage_0, itunesimage_1, itunesnewfeedurl_0, itunesowner_0, itunessubtitle_0, itunessummary_0, itunessummary_1, itunestitle_0, itunestype_0, language, lastbuilddate, link, link_0, mediathumbnail_0, pubdate, pubdate_0, title, title_0, version
         )
         WRAPPER (xml bv_rss_the_daily)
-    );
+    )
+    ATCACHE_THROUGH_VDP_ONLY;
 

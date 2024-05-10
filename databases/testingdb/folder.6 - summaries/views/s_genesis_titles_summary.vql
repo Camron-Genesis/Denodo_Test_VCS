@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC s_genesis_titles_summary
+    FOLDER = '/6 - summaries'
+    DATASOURCENAME=ds_mysql
+    CATALOGNAME='${databases.testingdb.folder.6 - summaries.views.jdbc.s_genesis_titles_summary.CATALOGNAME}' 
+    RELATIONNAME='genesis_titles' 
+    OUTPUTSCHEMA (
+        industrylabel_0 = 'industrylabel_0' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='150', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        personstate_0 = 'personstate_0' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='150', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        companies = 'companies' :'java.sql.Blob' (OPT) (sourcetyperadix='10', sourcetypesize='2147483647', description='', sourcetypeid='-4', sourcetypename='LONGBLOB')  NOT SORTABLE
+    );
+
+CREATE OR REPLACE SUMMARY VIEW s_genesis_titles_summary (
+        industrylabel_0:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '150', description = ''),
+        personstate_0:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '150', description = ''),
+        companies:_array_register_companycity_0_companyname_0_firstname_0_lastname_0 (sourcetypeid = '-4', sourcetyperadix = '10', sourcetypesize = '2147483647', description = '')
+    )
+    FOLDER = '/6 - summaries'
+    ADD SEARCHMETHOD s_genesis_titles_summary(
+        I18N us_est
+        CONSTRAINTS (
+             ADD industrylabel_0 (any) OPT ANY
+             ADD personstate_0 (any) OPT ANY
+             ADD companies NOS ZERO ()
+        )
+        OUTPUTLIST (companies, industrylabel_0, personstate_0
+        )
+        WRAPPER (jdbc s_genesis_titles_summary)
+    )
+AS SELECT industrylabel_0 AS industrylabel_0, personstate_0 AS personstate_0, companies AS companies FROM iv_genesis_titles;
+

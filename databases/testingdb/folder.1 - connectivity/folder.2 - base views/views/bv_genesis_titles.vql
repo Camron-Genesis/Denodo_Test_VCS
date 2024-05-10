@@ -1,9 +1,9 @@
 ﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE WRAPPER JDBC genesis_titles
+CREATE OR REPLACE WRAPPER JDBC bv_genesis_titles
     FOLDER = '/1 - connectivity/2 - base views'
     DATASOURCENAME=azure_connection
-    CATALOGNAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.genesis_titles.CATALOGNAME}' 
-    SCHEMANAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.genesis_titles.SCHEMANAME}' 
+    CATALOGNAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.bv_genesis_titles.CATALOGNAME}' 
+    SCHEMANAME='${databases.testingdb.folder.1 - connectivity.folder.2 - base views.views.jdbc.bv_genesis_titles.SCHEMANAME}' 
     RELATIONNAME='genesis_titles' 
     OUTPUTSCHEMA (
         lastname_0 = 'Last name' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
@@ -26,7 +26,8 @@ CREATE OR REPLACE WRAPPER JDBC genesis_titles
         companycountry_0 = 'Company Country' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
         industrylabel_0 = 'Industry label' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
         revenuein000s_0 = 'Revenue (in 000s)' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  ESCAPE SORTABLE,
-        employees = 'Employees' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+        employees = 'Employees' :'java.lang.String' (OPT) (sourcetypesize='150', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        lastmodifieddate = 'lastmodifieddate' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='7', sourcetypesize='27', sourcetypeid='93', sourcetypename='datetime2')  SORTABLE
     );
 
 CREATE OR REPLACE TABLE bv_genesis_titles I18N us_est (
@@ -50,12 +51,13 @@ CREATE OR REPLACE TABLE bv_genesis_titles I18N us_est (
         companycountry_0:text (sourcetypeid = '12', sourcetypesize = '150'),
         industrylabel_0:text (sourcetypeid = '12', sourcetypesize = '150'),
         revenuein000s_0:text (sourcetypeid = '12', sourcetypesize = '150'),
-        employees:text (sourcetypeid = '12', sourcetypesize = '150')
+        employees:text (sourcetypeid = '12', sourcetypesize = '150'),
+        lastmodifieddate:timestamp (sourcetypeid = '93', sourcetypedecimals = '7', sourcetypesize = '27')
     )
     FOLDER = '/1 - connectivity/2 - base views'
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT
-    ADD SEARCHMETHOD genesis_titles(
+    ADD SEARCHMETHOD bv_genesis_titles(
         I18N us_est
         CONSTRAINTS (
              ADD lastname_0 (any) OPT ANY
@@ -79,9 +81,10 @@ CREATE OR REPLACE TABLE bv_genesis_titles I18N us_est (
              ADD industrylabel_0 (any) OPT ANY
              ADD revenuein000s_0 (any) OPT ANY
              ADD employees (any) OPT ANY
+             ADD lastmodifieddate (any) OPT ANY
         )
-        OUTPUTLIST (companycity_0, companycountry_0, companydomainname_0, companyname_0, companyphonenumber_0, companystate_0, companystreetaddress_0, companyzippostalcode_0, country, directphonenumber_0, emailaddress_0, employees, firstname_0, industrylabel_0, jobtitle_0, lastname_0, personcity_0, personstate_0, personstreet_0, personzip_0, revenuein000s_0
+        OUTPUTLIST (companycity_0, companycountry_0, companydomainname_0, companyname_0, companyphonenumber_0, companystate_0, companystreetaddress_0, companyzippostalcode_0, country, directphonenumber_0, emailaddress_0, employees, firstname_0, industrylabel_0, jobtitle_0, lastmodifieddate, lastname_0, personcity_0, personstate_0, personstreet_0, personzip_0, revenuein000s_0
         )
-        WRAPPER (jdbc genesis_titles)
+        WRAPPER (jdbc bv_genesis_titles)
     );
 
